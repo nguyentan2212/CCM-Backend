@@ -53,5 +53,15 @@ namespace DappAPI.Services.Auth
             string publicAddress = signer.EncodeUTF8AndEcRecover(message, signature);
             return publicAddress;
         }
+
+        public string VerifyMessage(string message, string signature, string publicAddress)
+        {
+            string address = RecoverPersonalSignature(message, signature);
+            if (address != publicAddress)
+            {
+                return null;
+            }
+            return address;
+        }
     }
 }

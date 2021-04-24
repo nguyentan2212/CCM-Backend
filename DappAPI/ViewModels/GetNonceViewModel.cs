@@ -1,13 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DappAPI.ViewModels
 {
     public class GetNonceViewModel
     {
+        [Required]
         public string publicAddress { get; set; }
+        [Required]
         public long Nonce { get; set; }
     }
 }

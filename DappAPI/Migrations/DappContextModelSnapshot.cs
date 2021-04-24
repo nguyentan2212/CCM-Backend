@@ -25,7 +25,11 @@ namespace DappAPI.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("Birthdate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -100,17 +104,18 @@ namespace DappAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("613ccf8c-777e-4658-a065-5277a8c131b4"),
+                            Id = new Guid("8bf2d9f5-9326-4080-a0cc-ec80e86eaa7f"),
                             AccessFailedCount = 0,
-                            BirthDate = new DateTime(2021, 4, 11, 0, 0, 0, 0, DateTimeKind.Local),
-                            ConcurrencyStamp = "929f805c-f585-4572-b57c-2d4e2364e3f7",
-                            CreationDate = new DateTime(2021, 4, 11, 0, 0, 0, 0, DateTimeKind.Local),
+                            Address = "Ho Chi Minh City",
+                            Birthdate = new DateTime(2021, 4, 24, 0, 0, 0, 0, DateTimeKind.Local),
+                            ConcurrencyStamp = "d7c134ca-574d-495f-b780-d6f709e73351",
+                            CreationDate = new DateTime(2021, 4, 24, 0, 0, 0, 0, DateTimeKind.Local),
                             EmailConfirmed = false,
                             FullName = "Nguyen Minh Tan",
                             LockoutEnabled = false,
-                            Nonce = 92969L,
+                            Nonce = 34527L,
                             PhoneNumberConfirmed = false,
-                            PublicAddress = "0x7e576E3FFdFf96581f035B29B2E084299b72900c",
+                            PublicAddress = "0x7e576e3ffdff96581f035b29b2e084299b72900c",
                             TwoFactorEnabled = false
                         });
                 });

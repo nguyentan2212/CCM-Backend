@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DappAPI.Migrations
 {
-    public partial class CreateDappDB : Migration
+    public partial class CreateDappDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,9 +28,10 @@ namespace DappAPI.Migrations
                     Id = table.Column<Guid>(type: "TEXT", nullable: false),
                     PublicAddress = table.Column<string>(type: "TEXT", nullable: false),
                     FullName = table.Column<string>(type: "TEXT", nullable: false),
-                    BirthDate = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    Birthdate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     CreationDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     Nonce = table.Column<long>(type: "INTEGER", nullable: false),
+                    Address = table.Column<string>(type: "TEXT", nullable: false),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
@@ -159,8 +160,8 @@ namespace DappAPI.Migrations
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
-                columns: new[] { "Id", "AccessFailedCount", "BirthDate", "ConcurrencyStamp", "CreationDate", "Email", "EmailConfirmed", "FullName", "LockoutEnabled", "LockoutEnd", "Nonce", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "PublicAddress", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { new Guid("613ccf8c-777e-4658-a065-5277a8c131b4"), 0, new DateTime(2021, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), "929f805c-f585-4572-b57c-2d4e2364e3f7", new DateTime(2021, 4, 11, 0, 0, 0, 0, DateTimeKind.Local), null, false, "Nguyen Minh Tan", false, null, 92969L, null, null, null, null, false, "0x7e576E3FFdFf96581f035B29B2E084299b72900c", null, false, null });
+                columns: new[] { "Id", "AccessFailedCount", "Address", "Birthdate", "ConcurrencyStamp", "CreationDate", "Email", "EmailConfirmed", "FullName", "LockoutEnabled", "LockoutEnd", "Nonce", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "PublicAddress", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[] { new Guid("8bf2d9f5-9326-4080-a0cc-ec80e86eaa7f"), 0, "Ho Chi Minh City", new DateTime(2021, 4, 24, 0, 0, 0, 0, DateTimeKind.Local), "d7c134ca-574d-495f-b780-d6f709e73351", new DateTime(2021, 4, 24, 0, 0, 0, 0, DateTimeKind.Local), null, false, "Nguyen Minh Tan", false, null, 34527L, null, null, null, null, false, "0x7e576e3ffdff96581f035b29b2e084299b72900c", null, false, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",

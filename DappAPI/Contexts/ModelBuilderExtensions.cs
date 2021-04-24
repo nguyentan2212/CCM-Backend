@@ -15,10 +15,11 @@ namespace DappAPI.Contexts
                 {
                     Id = Guid.NewGuid(),
                     FullName = "Nguyen Minh Tan",
-                    PublicAddress = "0x7e576e3ffdff96581f035b29b2e084299b72900c",
+                    PublicAddress = "0x7e576E3FFdFf96581f035B29B2E084299b72900c",
                     Nonce = random.Next(10000,100000),
-                    BirthDate = DateTime.Today,
-                    CreationDate = DateTime.Today
+                    Birthdate = DateTime.Today,
+                    CreationDate = DateTime.Today,
+                    Address = "Ho Chi Minh City"
                 }
                 );
         }

@@ -1,6 +1,8 @@
 using DappAPI.Contexts;
+using DappAPI.Mapping;
 using DappAPI.Models;
 using DappAPI.Repositories.UnitOfWork;
+using DappAPI.Services.Account;
 using DappAPI.Services.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -64,7 +66,10 @@ namespace DappAPI
                     Configuration.GetValue<int>("JWTLifespan")
                 )
             );
-            services.AddScoped<IUnitOfWork, UnitOfWork>();           
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddAutoMapper(typeof(ModelToViewModel));
+            services.AddAutoMapper(typeof(ViewModelToModel));
+            services.AddScoped<IAccountService, AccountService>();
             services.AddControllers(options => options.Filters.Add(new AuthorizeFilter()));
             services.AddSwaggerGen(c =>
             {

@@ -11,11 +11,13 @@ namespace DappAPI.Models
         [Required]
         public string FullName { set; get; }
         [DataType(DataType.Date)]
-        public DateTime BirthDate { set; get; }
+        public DateTime Birthdate { set; get; }
         [Required]
         [DataType(DataType.Date)]
         public DateTime CreationDate { set; get; }
         [Required]
         public long Nonce { get; set; }
+        [Required]
+        public string Address { get; set; }
     }
 }
