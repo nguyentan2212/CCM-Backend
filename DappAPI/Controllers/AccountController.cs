@@ -2,6 +2,7 @@
 using DappAPI.Services.Auth;
 using DappAPI.ViewModels;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,6 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace DappAPI.Controllers
 {
-    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase
@@ -22,15 +22,30 @@ namespace DappAPI.Controllers
             this.accountService = accountService;
         }
 
-        //[Authorize(Roles = "admin")]
+        /// <summary>
+        /// Lấy danh sách người dùng
+        /// </summary>
+        /// <returns>Trả về danh sách tất cả người dùng</returns>
+        /// <response code="200">Trả về danh sách tất cả người dùng</response>
+        [Authorize(Roles = "admin")]
         [HttpGet("")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<List<UserInfoViewModel>> GetUsers()
         {
             List<UserInfoViewModel> result = accountService.GetAllUsersInfo();
-            return result;
+            return Ok(result);
         }
 
+        /// <summary>
+        /// Lấy user bằng public address
+        /// </summary>
+        /// <param name="publicAddress"></param>
+        /// <returns>User có public address cần lấy</returns>
+        /// <response code="200">Trả về user info cần tìm</response>
+        /// <response code="404">Không tìm thấy user</response>
         [HttpGet("{publicAddress}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         public ActionResult<UserInfoViewModel> GetUser(string publicAddress)
         {
             UserInfoViewModel result = accountService.GetUserInfo(publicAddress);
@@ -38,11 +53,22 @@ namespace DappAPI.Controllers
             {
                 return NotFound("User not found");
             }
-            return result;
+            return Ok(result);
         }
-      
+
+        /// <summary>
+        /// Lấy user nonce
+        /// </summary>
+        /// <param name="publicAddress"></param>
+        /// <returns>User nonce</returns>
+        /// <response code="200">Trả về user nonce</response>
+        /// <response code="400">Request param sai</response>
+        /// <response code="404">Không tìm thấy user có public address phù hợp</response>
         [AllowAnonymous]
         [HttpGet("nonce/{publicAddress}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest,Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         public ActionResult<GetNonceViewModel> GetNonce(string publicAddress)
         {
             if (!ModelState.IsValid)
@@ -58,8 +84,19 @@ namespace DappAPI.Controllers
             return Ok(viewModel);
         }
 
+        /// <summary>
+        /// Login
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Jwt token</returns>
+        /// <response code="200">Login thành công, trả về jwt token</response>
+        /// <response code="400">Request param sai</response>
+        /// <response code="401">Xác thực không thành công</response>
         [AllowAnonymous]
         [HttpPost("login")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(string))]
         public async Task<ActionResult<string>> Login([FromBody] LoginViewModel request)
         {
             if (!ModelState.IsValid)
@@ -84,10 +121,23 @@ namespace DappAPI.Controllers
             List<string> roles = await accountService.GetUserRoles(user.PublicAddress);
             string jwt = authService.GenerateToken(result, roles.ToList());          
             return Ok(jwt);
-        }  
-        
+        }
+
+        /// <summary>
+        /// Register
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>Jwt token</returns>
+        /// <response code="200">Register thành công, trả về jwt token</response>
+        /// <response code="400">Request param sai</response>
+        /// <response code="401">Xác thực không thành công</response>
+        /// <response code="409">User đã tồn tại</response>
         [AllowAnonymous]
         [HttpPost("register")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(string))]
         public async Task<ActionResult<string>> Register([FromBody] RegisterViewModel request)
         {
             if(!ModelState.IsValid)
@@ -115,7 +165,18 @@ namespace DappAPI.Controllers
             return Ok(jwt);
         }
 
+        /// <summary>
+        /// Cập nhật account
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns>User info</returns>
+        /// <response code="200">Update thành công, trả về user sau khi update</response>
+        /// <response code="400">Request param sai</response>
+        /// <response code="404">Không tifm thấy user</response>
         [HttpPost("update")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
+        [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         public async Task<ActionResult<UserInfoViewModel>> UpdateUser([FromBody] UpdateAccountViewModel request)
         {
             if (!ModelState.IsValid)
@@ -127,7 +188,7 @@ namespace DappAPI.Controllers
             {
                 return NotFound("User not found");
             }
-            return user;
+            return Ok(user);
         }
     }
 }
