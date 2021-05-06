@@ -39,7 +39,7 @@ namespace DappAPI.Services.Account
             return user.Nonce;
         }
 
-        public async Task<UserInfoViewModel> CreateUser(RegisterViewModel model)
+        public async Task<UserDataViewModel> CreateUser(RegisterViewModel model)
         {
             DappUser user = userRepo.FirstOrDefault(x => x.PublicAddress == model.PublicAddress);
             if (user != null)
@@ -52,7 +52,7 @@ namespace DappAPI.Services.Account
             user.Nonce = random.Next(10000, 100000);
             userRepo.Add(user);
             await work.SaveAsync();
-            UserInfoViewModel result = GetUserInfo(user);
+            UserDataViewModel result = GetUserInfo(user);
             return result;
         }
 
@@ -73,14 +73,14 @@ namespace DappAPI.Services.Account
             return roles.ToList();
         }
 
-        public UserInfoViewModel GetUserWithPublicAddress(string publicAddress)
+        public UserDataViewModel GetUserWithPublicAddress(string publicAddress)
         {
             DappUser user = userRepo.FirstOrDefault(x => x.PublicAddress == publicAddress);
-            UserInfoViewModel result = GetUserInfo(user);
+            UserDataViewModel result = GetUserInfo(user);
             return result;
         }
 
-        public async Task<UserInfoViewModel> UpdateUser(UpdateAccountViewModel model)
+        public async Task<UserDataViewModel> UpdateUser(UpdateAccountViewModel model)
         {
             DappUser user = userRepo.FirstOrDefault(x => x.PublicAddress == model.PublicAddress);
             if (user is null)
@@ -93,40 +93,40 @@ namespace DappAPI.Services.Account
             user.PhoneNumber = model.PhoneNumber;
             user.Birthdate = model.Birthdate;
             await work.SaveAsync();
-            UserInfoViewModel result = GetUserInfo(user);
+            UserDataViewModel result = GetUserInfo(user);
             return result;
         }
 
-        public UserInfoViewModel GetUserInfo(string publicAddress)
+        public UserDataViewModel GetUserInfo(string publicAddress)
         {
             DappUser user = userRepo.FirstOrDefault(x => x.PublicAddress == publicAddress);
             if (user is null)
             {
                 return null;
             }
-            UserInfoViewModel result = mapper.Map<DappUser, UserInfoViewModel>(user);
+            UserDataViewModel result = mapper.Map<DappUser, UserDataViewModel>(user);
             return result;
         }
 
-        public UserInfoViewModel GetUserInfo(DappUser user)
+        public UserDataViewModel GetUserInfo(DappUser user)
         {
             DappUser appUser = userRepo.FirstOrDefault(x => x.PublicAddress == user.PublicAddress);
             if (appUser is null)
             {
                 return null;
             }
-            UserInfoViewModel result = mapper.Map<DappUser, UserInfoViewModel>(appUser);
+            UserDataViewModel result = mapper.Map<DappUser, UserDataViewModel>(appUser);
             return result;
         }
 
-        public List<UserInfoViewModel> GetAllUsersInfo()
+        public List<UserDataViewModel> GetAllUsersInfo()
         {
             List<DappUser> user = userRepo.GetAll();
             if (user is null)
             {
                 return null;
             }
-            List<UserInfoViewModel> result = mapper.Map<List<DappUser>, List<UserInfoViewModel>>(user);
+            List<UserDataViewModel> result = mapper.Map<List<DappUser>, List<UserDataViewModel>>(user);
             return result;
         }
     }

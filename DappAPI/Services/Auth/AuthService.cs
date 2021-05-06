@@ -1,12 +1,10 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using Nethereum.Signer;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Nethereum.Signer;
-using Nethereum.Web3;
-using Nethereum.RPC;
 
 namespace DappAPI.Services.Auth
 {

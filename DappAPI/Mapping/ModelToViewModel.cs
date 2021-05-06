@@ -12,8 +12,9 @@ namespace DappAPI.Mapping
     {
         public ModelToViewModel()
         {
-            CreateMap<DappUser, UserInfoViewModel>()
+            CreateMap<DappUser, UserDataViewModel>()
                 .ForMember(des => des.Id, opt => opt.MapFrom(src => src.Id.ToString()));
+            CreateMap<Capital, CapitalDataViewModel>();
         }
     }
 }

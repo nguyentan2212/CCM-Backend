@@ -30,9 +30,9 @@ namespace DappAPI.Controllers
         [Authorize(Roles = "admin")]
         [HttpGet("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public ActionResult<List<UserInfoViewModel>> GetUsers()
+        public ActionResult<List<UserDataViewModel>> GetUsers()
         {
-            List<UserInfoViewModel> result = accountService.GetAllUsersInfo();
+            List<UserDataViewModel> result = accountService.GetAllUsersInfo();
             return Ok(result);
         }
 
@@ -46,9 +46,9 @@ namespace DappAPI.Controllers
         [HttpGet("{publicAddress}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
-        public ActionResult<UserInfoViewModel> GetUser(string publicAddress)
+        public ActionResult<UserDataViewModel> GetUser(string publicAddress)
         {
-            UserInfoViewModel result = accountService.GetUserInfo(publicAddress);
+            UserDataViewModel result = accountService.GetUserInfo(publicAddress);
             if (result is null)
             {
                 return NotFound("User not found");
@@ -104,7 +104,7 @@ namespace DappAPI.Controllers
                 return BadRequest("wrong request");
             }
             // Get the user with the given publicAddress           
-            UserInfoViewModel user = accountService.GetUserInfo(request.PublicAddress);
+            UserDataViewModel user = accountService.GetUserInfo(request.PublicAddress);
             if (user is null)
             {
                 return Unauthorized("User not found.");
@@ -145,7 +145,7 @@ namespace DappAPI.Controllers
                 return BadRequest("Wrong request");
             }
             // Check if account with same public address already exits.
-            UserInfoViewModel user = accountService.GetUserInfo(request.PublicAddress);
+            UserDataViewModel user = accountService.GetUserInfo(request.PublicAddress);
             if (user != null)
             {
                 return Conflict("This account already exits");
@@ -177,13 +177,13 @@ namespace DappAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
-        public async Task<ActionResult<UserInfoViewModel>> UpdateUser([FromBody] UpdateAccountViewModel request)
+        public async Task<ActionResult<UserDataViewModel>> UpdateUser([FromBody] UpdateAccountViewModel request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest("Wrong request");
             }           
-            UserInfoViewModel user = await accountService.UpdateUser(request);  
+            UserDataViewModel user = await accountService.UpdateUser(request);  
             if (user is null)
             {
                 return NotFound("User not found");

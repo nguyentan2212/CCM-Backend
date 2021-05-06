@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace DappAPI.Models
@@ -19,5 +20,8 @@ namespace DappAPI.Models
         public long Nonce { get; set; }
         [Required]
         public string Address { get; set; }
+
+        public List<Capital> CreatedCapitals { get; set; }
+        public List<Capital> ApprovedCapitals { get; set; }
     }
 }

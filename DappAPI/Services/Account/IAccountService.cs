@@ -13,14 +13,14 @@ namespace DappAPI.Services.Account
 
         public Task<List<string>> GetUserRoles(string publicAddress);
 
-        public List<UserInfoViewModel> GetAllUsersInfo();
+        public List<UserDataViewModel> GetAllUsersInfo();
 
-        public UserInfoViewModel GetUserInfo(string publicAddress);
+        public UserDataViewModel GetUserInfo(string publicAddress);
 
-        public UserInfoViewModel GetUserInfo(DappUser user);
+        public UserDataViewModel GetUserInfo(DappUser user);
 
-        public Task<UserInfoViewModel> CreateUser(RegisterViewModel model);
+        public Task<UserDataViewModel> CreateUser(RegisterViewModel model);
 
-        public Task<UserInfoViewModel> UpdateUser(UpdateAccountViewModel model);
+        public Task<UserDataViewModel> UpdateUser(UpdateAccountViewModel model);
     }
 }

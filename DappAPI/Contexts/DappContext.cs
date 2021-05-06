@@ -16,9 +16,21 @@ namespace DappAPI.Contexts
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<DappUser>()
+                .HasMany(a => a.CreatedCapitals)
+                .WithOne(b => b.Creator)
+                .OnDelete(DeleteBehavior.NoAction);
+
+            modelBuilder.Entity<DappUser>()
+                .HasMany(a => a.ApprovedCapitals)
+                .WithOne(b => b.Approver)
+                .OnDelete(DeleteBehavior.NoAction);
+
             modelBuilder.Seed();
         }
 
         public DbSet<DappUser> AppUsers { get; set; }
+        public DbSet<Capital> Capitals { get; set; }
     }
 }

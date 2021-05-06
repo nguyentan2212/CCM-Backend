@@ -2,7 +2,7 @@
 
 namespace DappAPI.ViewModels
 {
-    public class UserInfoViewModel
+    public class UserDataViewModel
     {
         public string Id { get; set; }
         public string PublicAddress { get; set; }
