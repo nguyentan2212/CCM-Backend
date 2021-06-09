@@ -14,7 +14,7 @@ namespace DappAPI.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "5.0.5");
+                .HasAnnotation("ProductVersion", "5.0.7");
 
             modelBuilder.Entity("DappAPI.Models.Capital", b =>
                 {
@@ -67,9 +67,6 @@ namespace DappAPI.Migrations
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("Birthdate")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -144,16 +141,15 @@ namespace DappAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c0505408-4301-4d2c-a9c2-dbd671608622"),
+                            Id = new Guid("3d2ef731-ed87-456a-bf57-96cf6a55f397"),
                             AccessFailedCount = 0,
                             Address = "Ho Chi Minh City",
-                            Birthdate = new DateTime(2021, 5, 5, 0, 0, 0, 0, DateTimeKind.Local),
-                            ConcurrencyStamp = "de461ffa-d6df-45ca-b2aa-13d8ae515b3c",
-                            CreationDate = new DateTime(2021, 5, 5, 0, 0, 0, 0, DateTimeKind.Local),
+                            ConcurrencyStamp = "27a4532e-1239-4d13-8bcf-9878966e889f",
+                            CreationDate = new DateTime(2021, 6, 9, 0, 0, 0, 0, DateTimeKind.Local),
                             EmailConfirmed = false,
                             FullName = "Nguyen Minh Tan",
                             LockoutEnabled = false,
-                            Nonce = 31754L,
+                            Nonce = 92398L,
                             PhoneNumberConfirmed = false,
                             PublicAddress = "0x7e576E3FFdFf96581f035B29B2E084299b72900c",
                             TwoFactorEnabled = false

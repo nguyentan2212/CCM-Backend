@@ -18,42 +18,47 @@ namespace DappAPI.Repositories
             dbSet = this.context.Set<TEntity>();
         }
 
-        public void Add(TEntity entity)
+        public Repository(Repository<TEntity> repository)
+        {
+            context = repository.context;
+            dbSet = context.Set<TEntity>();
+        }
+        public virtual void Add(TEntity entity)
         {
             dbSet.Add(entity);
         }
 
-        public void AddRange(IEnumerable<TEntity> entities)
+        public virtual void AddRange(IEnumerable<TEntity> entities)
         {
             dbSet.AddRange(entities);
         }
 
-        public TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate)
+        public virtual TEntity FirstOrDefault(Expression<Func<TEntity, bool>> predicate)
         {
             return dbSet.FirstOrDefault(predicate);
         }
 
-        public List<TEntity> Get(Expression<Func<TEntity, bool>> predicate)
+        public virtual List<TEntity> Get(Expression<Func<TEntity, bool>> predicate)
         {
             return dbSet.Where(predicate).ToList();
         }
 
-        public List<TEntity> GetAll()
+        public virtual List<TEntity> GetAll()
         {
             return dbSet.ToList();
-        }
+        }   
 
-        public void Remove(TEntity entity)
+        public virtual void Remove(TEntity entity)
         {
             dbSet.Remove(entity);
         }
 
-        public void Update(TEntity entity)
+        public virtual void Update(TEntity entity)
         {
             dbSet.Update(entity);
         }
 
-        public void UpdateRange(IEnumerable<TEntity> entities)
+        public virtual void UpdateRange(IEnumerable<TEntity> entities)
         {
             dbSet.UpdateRange(entities);
         }

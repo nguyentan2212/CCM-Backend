@@ -20,9 +20,8 @@ namespace DappAPI.ViewModels
         public CapitalType Type { get; set; }
         [Required]
         public CapitalStatus Status { get; set; }
-        [Required]
-        public UserDataViewModel Creator { get; set; }
-        public UserDataViewModel Approver { get; set; }
+        public string Creator { get; set; }
+        public string Approver { get; set; }
         [Required]
         public DateTime CreationDate { get; set; }
     }

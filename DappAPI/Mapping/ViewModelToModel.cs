@@ -10,6 +10,8 @@ namespace DappAPI.Mapping
         {
             CreateMap<RegisterViewModel, DappUser>();
             CreateMap<UpdateAccountViewModel, DappUser>();
+            CreateMap<CreateCapitalViewModel, Capital>();
+            CreateMap<UpdateCapitalViewModel, Capital>();
         }
     }
 }

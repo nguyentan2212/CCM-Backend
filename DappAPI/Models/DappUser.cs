@@ -11,8 +11,6 @@ namespace DappAPI.Models
         public string PublicAddress { get; set; }
         [Required]
         public string FullName { set; get; }
-        [DataType(DataType.Date)]
-        public DateTime Birthdate { set; get; }
         [Required]
         [DataType(DataType.Date)]
         public DateTime CreationDate { set; get; }

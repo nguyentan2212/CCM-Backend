@@ -1,6 +1,7 @@
 ﻿using DappAPI.Models;
 using DappAPI.Repositories;
 using DappAPI.Repositories.UnitOfWork;
+using DappAPI.Repositories.AccountRepositories;
 using DappAPI.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -22,7 +23,7 @@ namespace DappAPI.Services.Account
         {
             this.work = work;
             this.userManager = userManager;
-            userRepo = work.CreateRepository<DappUser>();
+            userRepo = new AccountReposity(work.CreateRepository<DappUser>());
             this.mapper = mapper;
         }
 
@@ -91,7 +92,6 @@ namespace DappAPI.Services.Account
             user.Address = model.Address;
             user.Email = model.Email;
             user.PhoneNumber = model.PhoneNumber;
-            user.Birthdate = model.Birthdate;
             await work.SaveAsync();
             UserDataViewModel result = GetUserInfo(user);
             return result;

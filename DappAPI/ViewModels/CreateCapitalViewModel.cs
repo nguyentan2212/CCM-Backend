@@ -13,8 +13,6 @@ namespace DappAPI.ViewModels
         [Required]
         public CapitalType Type { get; set; }
         [Required]
-        public CapitalStatus Status { get; set; }
-        [Required]
-        public string CreationUserPublicAddress { get; set; }
+        public string CreatorPublicAddress { get; set; }
     }
 }

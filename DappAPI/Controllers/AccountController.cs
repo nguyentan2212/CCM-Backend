@@ -27,7 +27,7 @@ namespace DappAPI.Controllers
         /// </summary>
         /// <returns>Trả về danh sách tất cả người dùng</returns>
         /// <response code="200">Trả về danh sách tất cả người dùng</response>
-        [Authorize(Roles = "admin")]
+        [AllowAnonymous]
         [HttpGet("")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public ActionResult<List<UserDataViewModel>> GetUsers()
@@ -97,7 +97,7 @@ namespace DappAPI.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(string))]
-        public async Task<ActionResult<string>> Login([FromBody] LoginViewModel request)
+        public async Task<ActionResult<LoginResultViewModel>> Login([FromBody] LoginViewModel request)
         {
             if (!ModelState.IsValid)
             {
@@ -119,8 +119,14 @@ namespace DappAPI.Controllers
             // Verification succeeded, change nonce and return JWT
             long nonce = await accountService.ChangeNonce(user.PublicAddress);
             List<string> roles = await accountService.GetUserRoles(user.PublicAddress);
-            string jwt = authService.GenerateToken(result, roles.ToList());          
-            return Ok(jwt);
+            string jwt = authService.GenerateToken(result, roles.ToList());
+            LoginResultViewModel loginResult = new LoginResultViewModel(){
+                Jwt = jwt,
+                Id = user.Id,
+                FullName = user.FullName,
+                PublicAddress = user.PublicAddress
+            };
+            return Ok(loginResult);
         }
 
         /// <summary>
@@ -138,7 +144,7 @@ namespace DappAPI.Controllers
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status401Unauthorized, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status409Conflict, Type = typeof(string))]
-        public async Task<ActionResult<string>> Register([FromBody] RegisterViewModel request)
+        public async Task<ActionResult<LoginResultViewModel>> Register([FromBody] RegisterViewModel request)
         {
             if(!ModelState.IsValid)
             {
@@ -150,19 +156,20 @@ namespace DappAPI.Controllers
             {
                 return Conflict("This account already exits");
             }
-            // Verify digital signature
-            string message = "I am signing my one-time nonce: " + accountService.GetNonce(request.PublicAddress).ToString();
-            string result = authService.VerifyMessage(message, request.Signature, request.PublicAddress);
-            if (String.IsNullOrEmpty(result))
-            {
-                return Unauthorized("Signature verification failed!");
-            }
+            
             // Verification succeeded, create new user, change nonce and return JWT
             user = await accountService.CreateUser(request);
             long nonce = await accountService.ChangeNonce(user.PublicAddress);
             List<string> roles = await accountService.GetUserRoles(user.PublicAddress);
             string jwt = authService.GenerateToken(user.PublicAddress, roles.ToList());
-            return Ok(jwt);
+            LoginResultViewModel loginResult = new LoginResultViewModel()
+            {
+                Jwt = jwt,
+                Id = user.Id,
+                FullName = user.FullName,
+                PublicAddress = user.PublicAddress
+            };
+            return Ok(loginResult);
         }
 
         /// <summary>

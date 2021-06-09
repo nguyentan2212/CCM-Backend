@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DappAPI.Extensions.Enums;
 using DappAPI.Repositories;
+using DappAPI.Repositories.CapitalRepositories;
 using DappAPI.Repositories.UnitOfWork;
 using DappAPI.ViewModels;
 using DappAPI.Models;
@@ -20,7 +21,7 @@ namespace DappAPI.Services.CapitalServices
         {
             this.work = work;
             this.mapper = mapper;
-            capitalRepo = work.CreateRepository<Capital>();
+            capitalRepo = new CapitalRepository(work.CreateRepository<Capital>());
             userRepo = work.CreateRepository<DappUser>();
         }
 
@@ -45,7 +46,7 @@ namespace DappAPI.Services.CapitalServices
             Capital capital = capitalRepo.FirstOrDefault(x => x.Id == id);
             DappUser user = userRepo.FirstOrDefault(x => x.PublicAddress == userAddress);
 
-            if (capital is null || user is null || capital.Status != CapitalStatus.Pending)
+            if (capital is null || user is null || capital.Status != CapitalStatus.Pending || capital.Creator.PublicAddress == userAddress)
             {
                 return null;
             }
@@ -58,7 +59,7 @@ namespace DappAPI.Services.CapitalServices
 
         public async Task<CapitalDataViewModel> CreateCapital(CreateCapitalViewModel request)
         {
-            DappUser user = userRepo.FirstOrDefault(x => x.PublicAddress == request.CreationUserPublicAddress);
+            DappUser user = userRepo.FirstOrDefault(x => x.PublicAddress == request.CreatorPublicAddress);
             if (user is null)
             {
                 return null;
@@ -66,6 +67,7 @@ namespace DappAPI.Services.CapitalServices
             Capital capital = mapper.Map<CreateCapitalViewModel, Capital>(request);
             capital.Creator = user;
             capital.CreationDate = DateTime.Today;
+            capital.Status = CapitalStatus.Pending;
             capitalRepo.Add(capital);
             await work.SaveAsync();
             CapitalDataViewModel result = mapper.Map<Capital, CapitalDataViewModel>(capital);
@@ -118,8 +120,10 @@ namespace DappAPI.Services.CapitalServices
 
         public List<CapitalDataViewModel> GetCapitalsByKeyword(string keyword)
         {
-            List<Capital> capitals = capitalRepo.Get(x => x.Title.ToUpper().Contains(keyword.ToUpper()));
-            capitals.AddRange(capitalRepo.Get(x => x.Description.ToUpper().Contains(keyword.ToUpper())));
+            List<Capital> capitals = capitalRepo.Get(x => 
+                x.Title.ToUpper().Contains(keyword.ToUpper()) ||
+                x.Description.ToUpper().Contains(keyword.ToUpper()));
+          
             if (capitals is null)
             {
                 return null;

@@ -4,6 +4,7 @@ using DappAPI.Models;
 using DappAPI.Repositories.UnitOfWork;
 using DappAPI.Services.Account;
 using DappAPI.Services.Auth;
+using DappAPI.Services.CapitalServices;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -72,6 +73,7 @@ namespace DappAPI
             services.AddAutoMapper(typeof(ModelToViewModel));
             services.AddAutoMapper(typeof(ViewModelToModel));
             services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<ICapitalService, CapitalService>();
             services.AddControllers(options => options.Filters.Add(new AuthorizeFilter()));
             services.AddSwaggerGen(c =>
             {

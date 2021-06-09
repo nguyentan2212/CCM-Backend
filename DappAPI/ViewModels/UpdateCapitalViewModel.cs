@@ -18,7 +18,5 @@ namespace DappAPI.ViewModels
         public double Value { get; set; }
         [Required]
         public CapitalType Type { get; set; }
-        [Required]
-        public CapitalStatus Status { get; set; }
     }
 }

@@ -17,7 +17,6 @@ namespace DappAPI.Contexts
                     FullName = "Nguyen Minh Tan",
                     PublicAddress = "0x7e576E3FFdFf96581f035B29B2E084299b72900c",
                     Nonce = random.Next(10000,100000),
-                    Birthdate = DateTime.Today,
                     CreationDate = DateTime.Today,
                     Address = "Ho Chi Minh City"
                 }
