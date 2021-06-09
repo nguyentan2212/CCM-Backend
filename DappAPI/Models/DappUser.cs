@@ -5,14 +5,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DappAPI.Models
 {
-    public class DappUser : IdentityUser<Guid>
+    public class DappUser : IdentityUser<string>
     {       
         [Required]
         public string PublicAddress { get; set; }
         [Required]
         public string FullName { set; get; }
         [Required]
-        [DataType(DataType.Date)]
         public DateTime CreationDate { set; get; }
         [Required]
         public long Nonce { get; set; }

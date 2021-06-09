@@ -6,7 +6,7 @@ using System;
 
 namespace DappAPI.Contexts
 {
-    public class DappContext : IdentityDbContext<DappUser, IdentityRole<Guid>, Guid>
+    public class DappContext : IdentityDbContext<DappUser, IdentityRole<string>, string>
     {
         public DappContext(DbContextOptions<DappContext> options) : base(options)
         {

@@ -13,7 +13,7 @@ namespace DappAPI.Mapping
         public ModelToViewModel()
         {
             CreateMap<DappUser, UserDataViewModel>()
-                .ForMember(des => des.Id, opt => opt.MapFrom(src => src.Id.ToString()));
+                .ForMember(des => des.Id, opt => opt.MapFrom(src => src.Id));
             CreateMap<Capital, CapitalDataViewModel>()
                 .ForMember(des => des.Creator, opt => opt.MapFrom(src => src.Creator.PublicAddress))
                 .ForMember(des => des.Approver, opt => opt.MapFrom(src => src.Approver.PublicAddress));

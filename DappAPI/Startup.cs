@@ -38,9 +38,10 @@ namespace DappAPI
             services.AddCors();
             services.AddDbContext<DappContext>(options =>
             {
-                options.UseSqlite(Configuration.GetConnectionString("AppContext"));
+                //options.UseSqlite(Configuration.GetConnectionString("AppContext"));
+                options.UseNpgsql(Configuration.GetConnectionString("HerokuNPGSQL"));
             });
-            services.AddIdentity<DappUser, IdentityRole<Guid>>().AddEntityFrameworkStores<DappContext>();
+            services.AddIdentity<DappUser, IdentityRole<string>>().AddEntityFrameworkStores<DappContext>();
             services.AddIdentityCore<DappUser>(options =>
             {
                 options.Password.RequireDigit = false;

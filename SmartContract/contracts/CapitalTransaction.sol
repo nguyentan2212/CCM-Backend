@@ -1,7 +1,7 @@
 //SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
 
-import "UserManager.sol";
+import "./UserManager.sol";
 
 contract CapitalTransaction {
     enum CapitalType{NONE,SHORT_TERM_ASSETS, LONG_TERM_ASSETS, LIABILITY, EQUITY}
