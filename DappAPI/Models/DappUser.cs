@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace DappAPI.Models
 {
-    public class DappUser : IdentityUser<string>
+    public class DappUser : IdentityUser<Guid>
     {       
         [Required]
         public string PublicAddress { get; set; }

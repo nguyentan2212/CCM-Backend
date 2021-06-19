@@ -17,9 +17,11 @@ namespace DappAPI.ViewModels
         [Required]
         public double Value { get; set; }
         [Required]
-        public CapitalType Type { get; set; }
+        public string Asset { get; set; }
         [Required]
-        public CapitalStatus Status { get; set; }
+        public string Type { get; set; }
+        [Required]
+        public string Status { get; set; }
         public string Creator { get; set; }
         public string Approver { get; set; }
         [Required]

@@ -71,20 +71,6 @@ contract CapitalTransaction {
         capitals.push(capital);
     }
     
-    function updateCapital(uint256 id, string memory title, string memory description, uint8 capitalType, uint256 value) 
-    public onlyActiveUser(){
-        uint256 index = id2index[id];
-        require(index2capital[index].Id != 0, "Capital not found");
-        require(id >= 0, "Id must is a positive number");
-        require(capitalType >= 0 && capitalType <= 3 , "Capital type is invalid");
-        
-        Capital storage capital = index2capital[index];
-        capital.Title = title;
-        capital.Description = description;
-        capital.Type = CapitalType(capitalType);
-        capital.Value = value;
-    }
-    
     function confirm(uint256 id) public {
         uint256 index = id2index[id];
         require(index2capital[index].Id != 0, "Capital not found");

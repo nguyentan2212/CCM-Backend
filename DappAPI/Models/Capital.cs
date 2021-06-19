@@ -14,6 +14,8 @@ namespace DappAPI.Models
         [Required]
         public double Value { get; set; }
         [Required]
+        public AssetType Asset { get; set; }
+        [Required]
         public CapitalType Type { get; set; }
         [Required]
         public CapitalStatus Status { get; set; }

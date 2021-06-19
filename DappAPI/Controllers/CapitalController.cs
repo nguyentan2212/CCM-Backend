@@ -117,6 +117,27 @@ namespace DappAPI.Controllers
         }
 
         /// <summary>
+        /// Lấy khoản vốn có asset type như yêu cầu
+        /// </summary>
+        /// <param name="asset"></param>
+        /// <returns></returns>
+        [HttpGet("asset")]
+        public ActionResult<List<CapitalDataViewModel>> GetByAsset(int asset)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Wrong request");
+            }
+
+            List<CapitalDataViewModel> capitals = capitalService.GetCapitalsByAsset((AssetType)asset);
+            if (capitals is null)
+            {
+                return NotFound("Not found");
+            }
+            return Ok(capitals);
+        }
+
+        /// <summary>
         /// Lấy khoản vốn có trạng thái như yêu cầu
         /// </summary>
         /// <param name="status"></param>

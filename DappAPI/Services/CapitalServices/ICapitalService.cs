@@ -10,6 +10,7 @@ namespace DappAPI.Services.CapitalServices
         public List<CapitalDataViewModel> GetAllCapitals();
         public List<CapitalDataViewModel> GetCapitalsByCreator(string creatorAddress);
         public List<CapitalDataViewModel> GetCapitalsByApprover(string approverAddress);
+        public List<CapitalDataViewModel> GetCapitalsByAsset(AssetType asset);
         public List<CapitalDataViewModel> GetCapitalsByType(CapitalType type);
         public List<CapitalDataViewModel> GetCapitalsByStatus(CapitalStatus status);
         public List<CapitalDataViewModel> GetCapitalsByValue(double from, double to);

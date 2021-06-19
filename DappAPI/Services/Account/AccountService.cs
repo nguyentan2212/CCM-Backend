@@ -48,12 +48,12 @@ namespace DappAPI.Services.Account
                 return null;
             }
             user = mapper.Map<RegisterViewModel, DappUser>(model);
-            user.CreationDate = DateTime.Today;
-            Random random = new Random();
-            user.Nonce = random.Next(10000, 100000);
             userRepo.Add(user);
             await work.SaveAsync();
-            UserDataViewModel result = GetUserInfo(user);
+            await userManager.AddToRoleAsync(user, "admin");
+            UserDataViewModel result = mapper.Map<DappUser, UserDataViewModel>(user);
+            var roles = await GetUserRoles(result.PublicAddress);
+            result.Role = roles.FirstOrDefault();
             return result;
         }
 
@@ -77,7 +77,10 @@ namespace DappAPI.Services.Account
         public UserDataViewModel GetUserWithPublicAddress(string publicAddress)
         {
             DappUser user = userRepo.FirstOrDefault(x => x.PublicAddress == publicAddress);
-            UserDataViewModel result = GetUserInfo(user);
+            
+            UserDataViewModel result = mapper.Map<DappUser, UserDataViewModel>(user);
+            var roles = GetUserRoles(result.PublicAddress).GetAwaiter().GetResult();
+            result.Role = roles.FirstOrDefault();
             return result;
         }
 
@@ -93,7 +96,9 @@ namespace DappAPI.Services.Account
             user.Email = model.Email;
             user.PhoneNumber = model.PhoneNumber;
             await work.SaveAsync();
-            UserDataViewModel result = GetUserInfo(user);
+            UserDataViewModel result = mapper.Map<DappUser, UserDataViewModel>(user);
+            var roles = GetUserRoles(result.PublicAddress).GetAwaiter().GetResult();
+            result.Role = roles.FirstOrDefault();
             return result;
         }
 
@@ -105,17 +110,8 @@ namespace DappAPI.Services.Account
                 return null;
             }
             UserDataViewModel result = mapper.Map<DappUser, UserDataViewModel>(user);
-            return result;
-        }
-
-        public UserDataViewModel GetUserInfo(DappUser user)
-        {
-            DappUser appUser = userRepo.FirstOrDefault(x => x.PublicAddress == user.PublicAddress);
-            if (appUser is null)
-            {
-                return null;
-            }
-            UserDataViewModel result = mapper.Map<DappUser, UserDataViewModel>(appUser);
+            var roles = GetUserRoles(result.PublicAddress).GetAwaiter().GetResult();
+            result.Role = roles.FirstOrDefault();
             return result;
         }
 
@@ -127,6 +123,39 @@ namespace DappAPI.Services.Account
                 return null;
             }
             List<UserDataViewModel> result = mapper.Map<List<DappUser>, List<UserDataViewModel>>(user);
+            foreach (var item in result)
+            {
+                var roles = GetUserRoles(item.PublicAddress).GetAwaiter().GetResult();
+                item.Role = roles.FirstOrDefault();
+            }
+            return result;
+        }
+
+        public async Task<UserDataViewModel> Promote(string userId)
+        {
+            DappUser user = userRepo.FirstOrDefault(x => x.Id.ToString() == userId);
+            if (user is null)
+            {
+                return null;
+            }
+            await userManager.AddToRoleAsync(user, "admin");
+            UserDataViewModel result = mapper.Map<DappUser, UserDataViewModel>(user);
+            var roles = GetUserRoles(result.PublicAddress).GetAwaiter().GetResult();
+            result.Role = roles.FirstOrDefault();
+            return result;
+        }
+
+        public async Task<UserDataViewModel> Demote(string userId)
+        {
+            DappUser user = userRepo.FirstOrDefault(x => x.Id.ToString() == userId);
+            if (user is null)
+            {
+                return null;
+            }
+            await userManager.RemoveFromRoleAsync(user, "admin");
+            UserDataViewModel result = mapper.Map<DappUser, UserDataViewModel>(user);
+            var roles = GetUserRoles(result.PublicAddress).GetAwaiter().GetResult();
+            result.Role = roles.FirstOrDefault();
             return result;
         }
     }

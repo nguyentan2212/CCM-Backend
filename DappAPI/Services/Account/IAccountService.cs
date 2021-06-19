@@ -17,10 +17,12 @@ namespace DappAPI.Services.Account
 
         public UserDataViewModel GetUserInfo(string publicAddress);
 
-        public UserDataViewModel GetUserInfo(DappUser user);
-
         public Task<UserDataViewModel> CreateUser(RegisterViewModel model);
 
         public Task<UserDataViewModel> UpdateUser(UpdateAccountViewModel model);
+
+        public Task<UserDataViewModel> Promote(string userId);
+
+        public Task<UserDataViewModel> Demote(string userId);
     }
 }

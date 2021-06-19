@@ -4,7 +4,6 @@ using DappAPI.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace DappAPI.Migrations
 {
@@ -15,41 +14,41 @@ namespace DappAPI.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Relational:MaxIdentifierLength", 63)
-                .HasAnnotation("ProductVersion", "5.0.7")
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                .HasAnnotation("ProductVersion", "5.0.7");
 
             modelBuilder.Entity("DappAPI.Models.Capital", b =>
                 {
                     b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("INTEGER");
 
-                    b.Property<string>("ApproverId")
-                        .HasColumnType("text");
+                    b.Property<Guid?>("ApproverId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Asset")
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("TEXT");
 
-                    b.Property<string>("CreatorId")
-                        .HasColumnType("text");
+                    b.Property<Guid?>("CreatorId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text");
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("Status")
-                        .HasColumnType("integer");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Title")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("Type")
-                        .HasColumnType("integer");
+                        .HasColumnType("INTEGER");
 
                     b.Property<double>("Value")
-                        .HasColumnType("double precision");
+                        .HasColumnType("REAL");
 
                     b.HasKey("Id");
 
@@ -62,73 +61,74 @@ namespace DappAPI.Migrations
 
             modelBuilder.Entity("DappAPI.Models.DappUser", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
 
                     b.Property<int>("AccessFailedCount")
-                        .HasColumnType("integer");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Address")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("text");
+                        .HasColumnType("TEXT");
 
                     b.Property<DateTime>("CreationDate")
-                        .HasColumnType("timestamp without time zone");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("EmailConfirmed")
-                        .HasColumnType("boolean");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("LockoutEnabled")
-                        .HasColumnType("boolean");
+                        .HasColumnType("INTEGER");
 
                     b.Property<DateTimeOffset?>("LockoutEnd")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("TEXT");
 
                     b.Property<long>("Nonce")
-                        .HasColumnType("bigint");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PasswordHash")
-                        .HasColumnType("text");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("text");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("PhoneNumberConfirmed")
-                        .HasColumnType("boolean");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("PublicAddress")
                         .IsRequired()
-                        .HasColumnType("text");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("SecurityStamp")
-                        .HasColumnType("text");
+                        .HasColumnType("TEXT");
 
                     b.Property<bool>("TwoFactorEnabled")
-                        .HasColumnType("boolean");
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -140,43 +140,25 @@ namespace DappAPI.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "506f4cab-2e6a-4292-8a15-a04de3b8a743",
-                            AccessFailedCount = 0,
-                            Address = "Ho Chi Minh City",
-                            ConcurrencyStamp = "ab30f94d-eea7-49b3-96f2-22d5e1043b22",
-                            CreationDate = new DateTime(2021, 6, 9, 0, 0, 0, 0, DateTimeKind.Local),
-                            Email = "abc@.def.com",
-                            EmailConfirmed = false,
-                            FullName = "Nguyen Minh Tan",
-                            LockoutEnabled = false,
-                            Nonce = 98765L,
-                            PhoneNumber = "0123456789",
-                            PhoneNumberConfirmed = false,
-                            PublicAddress = "0x7e576E3FFdFf96581f035B29B2E084299b72900c",
-                            TwoFactorEnabled = false
-                        });
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<string>", b =>
+            modelBuilder.Entity("DappAPI.Models.UserRole", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
-                        .HasColumnType("text");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("NormalizedName")
                         .HasMaxLength(256)
-                        .HasColumnType("character varying(256)");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -187,22 +169,20 @@ namespace DappAPI.Migrations
                     b.ToTable("AspNetRoles");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("text");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("text");
+                        .HasColumnType("TEXT");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -211,22 +191,20 @@ namespace DappAPI.Migrations
                     b.ToTable("AspNetRoleClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("ClaimType")
-                        .HasColumnType("text");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ClaimValue")
-                        .HasColumnType("text");
+                        .HasColumnType("TEXT");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
@@ -235,20 +213,19 @@ namespace DappAPI.Migrations
                     b.ToTable("AspNetUserClaims");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("text");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ProviderKey")
-                        .HasColumnType("text");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ProviderDisplayName")
-                        .HasColumnType("text");
+                        .HasColumnType("TEXT");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -257,13 +234,13 @@ namespace DappAPI.Migrations
                     b.ToTable("AspNetUserLogins");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("text");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -272,19 +249,19 @@ namespace DappAPI.Migrations
                     b.ToTable("AspNetUserRoles");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("text");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("LoginProvider")
-                        .HasColumnType("text");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .HasColumnType("text");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Value")
-                        .HasColumnType("text");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
@@ -308,16 +285,16 @@ namespace DappAPI.Migrations
                     b.Navigation("Creator");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<string>", null)
+                    b.HasOne("DappAPI.Models.UserRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.HasOne("DappAPI.Models.DappUser", null)
                         .WithMany()
@@ -326,7 +303,7 @@ namespace DappAPI.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.HasOne("DappAPI.Models.DappUser", null)
                         .WithMany()
@@ -335,9 +312,9 @@ namespace DappAPI.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<string>", null)
+                    b.HasOne("DappAPI.Models.UserRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -350,7 +327,7 @@ namespace DappAPI.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
                     b.HasOne("DappAPI.Models.DappUser", null)
                         .WithMany()

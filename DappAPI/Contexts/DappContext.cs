@@ -1,12 +1,11 @@
 ﻿using DappAPI.Models;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 
 namespace DappAPI.Contexts
 {
-    public class DappContext : IdentityDbContext<DappUser, IdentityRole<string>, string>
+    public class DappContext : IdentityDbContext<DappUser, UserRole, Guid>
     {
         public DappContext(DbContextOptions<DappContext> options) : base(options)
         {

@@ -1,9 +1,5 @@
 ﻿using DappAPI.Extensions.Enums;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace DappAPI.ViewModels
 {
@@ -16,6 +12,8 @@ namespace DappAPI.ViewModels
         public string Description { get; set; }
         [Required]
         public double Value { get; set; }
+        [Required]
+        public AssetType Asset { get; set; }
         [Required]
         public CapitalType Type { get; set; }
     }

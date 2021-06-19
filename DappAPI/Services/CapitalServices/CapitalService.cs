@@ -96,6 +96,17 @@ namespace DappAPI.Services.CapitalServices
             return result;
         }
 
+        public List<CapitalDataViewModel> GetCapitalsByAsset(AssetType asset)
+        {
+            List<Capital> capitals = capitalRepo.Get(x => x.Asset == asset);
+            if (capitals is null)
+            {
+                return null;
+            }
+            List<CapitalDataViewModel> result = mapper.Map<List<Capital>, List<CapitalDataViewModel>>(capitals);
+            return result;
+        }
+
         public List<CapitalDataViewModel> GetCapitalsByCreator(string creatorAddress)
         {
             List<Capital> capitals = capitalRepo.Get(x => x.Creator.PublicAddress == creatorAddress);
