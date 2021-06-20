@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 namespace DappAPI.Controllers
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class AccountController : ControllerBase
@@ -37,18 +38,18 @@ namespace DappAPI.Controllers
         }
 
         /// <summary>
-        /// Lấy user bằng public address
+        /// Lấy user bằng userId
         /// </summary>
-        /// <param name="publicAddress"></param>
-        /// <returns>User có public address cần lấy</returns>
+        /// <param name="userId"></param>
+        /// <returns>User có id cần lấy</returns>
         /// <response code="200">Trả về user info cần tìm</response>
         /// <response code="404">Không tìm thấy user</response>
-        [HttpGet("{publicAddress}")]
+        [HttpGet("{userId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
-        public ActionResult<UserDataViewModel> GetUser(string publicAddress)
+        public async Task<ActionResult<UserDataViewModel>> GetUser(string userId)
         {
-            UserDataViewModel result = accountService.GetUserInfo(publicAddress);
+            UserDataViewModel result = await accountService.GetUserInfo(userId);
             if (result is null)
             {
                 return NotFound("User not found");
@@ -104,7 +105,7 @@ namespace DappAPI.Controllers
                 return BadRequest("wrong request");
             }
             // Get the user with the given publicAddress           
-            UserDataViewModel user = accountService.GetUserInfo(request.PublicAddress);
+            UserDataViewModel user = accountService.GetUserWithPublicAddress(request.PublicAddress);
             if (user is null)
             {
                 return Unauthorized("User not found.");
@@ -118,7 +119,7 @@ namespace DappAPI.Controllers
             }
             // Verification succeeded, change nonce and return JWT
             long nonce = await accountService.ChangeNonce(user.PublicAddress);
-            List<string> roles = await accountService.GetUserRoles(user.PublicAddress);
+            List<string> roles = await accountService.GetUserRoles(user.Id.ToString());
             string jwt = authService.GenerateToken(result, roles.ToList());
             LoginResultViewModel loginResult = new LoginResultViewModel(){
                 Jwt = jwt,
@@ -151,7 +152,7 @@ namespace DappAPI.Controllers
                 return BadRequest("Wrong request");
             }
             // Check if account with same public address already exits.
-            UserDataViewModel user = accountService.GetUserInfo(request.PublicAddress);
+            UserDataViewModel user = accountService.GetUserWithPublicAddress(request.PublicAddress);
             if (user != null)
             {
                 return Conflict("This account already exits");
@@ -160,7 +161,7 @@ namespace DappAPI.Controllers
             // Verification succeeded, create new user, change nonce and return JWT
             user = await accountService.CreateUser(request);
             long nonce = await accountService.ChangeNonce(user.PublicAddress);
-            List<string> roles = await accountService.GetUserRoles(user.PublicAddress);
+            List<string> roles = await accountService.GetUserRoles(user.Id.ToString());
             string jwt = authService.GenerateToken(user.PublicAddress, roles.ToList());
             LoginResultViewModel loginResult = new LoginResultViewModel()
             {

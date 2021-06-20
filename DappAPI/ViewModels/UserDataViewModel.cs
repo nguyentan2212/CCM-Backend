@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 
 namespace DappAPI.ViewModels
 {
@@ -11,8 +11,6 @@ namespace DappAPI.ViewModels
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string Role { get; set; }
-
-        public List<CapitalDataViewModel> CreatedCapitals { get; set; }
-        public List<CapitalDataViewModel> ApprovedCapitals { get; set; }
+        public DateTime CreationDate { set; get; }
     }
 }

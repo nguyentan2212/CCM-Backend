@@ -11,11 +11,13 @@ namespace DappAPI.Services.Account
 
         public Task<long> ChangeNonce(string publicAddress);
 
-        public Task<List<string>> GetUserRoles(string publicAddress);
+        public Task<List<string>> GetUserRoles(string userId);
 
         public List<UserDataViewModel> GetAllUsersInfo();
 
-        public UserDataViewModel GetUserInfo(string publicAddress);
+        public Task<UserDataViewModel> GetUserInfo(string userId);
+
+        public UserDataViewModel GetUserWithPublicAddress(string publicAddress);
 
         public Task<UserDataViewModel> CreateUser(RegisterViewModel model);
 

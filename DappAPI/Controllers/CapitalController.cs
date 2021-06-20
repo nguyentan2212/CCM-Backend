@@ -63,11 +63,59 @@ namespace DappAPI.Controllers
         }
 
         /// <summary>
+        /// Lấy các khoản vốn mà người dùng có public address đã tạo
+        /// </summary>
+        /// <param name="publicAddress"></param>
+        /// <returns></returns>
+        /// <response code="200">Trả về danh sách khoản vốn cần tìm</response>
+        /// <response code="400">Request param sai</response>
+        /// <response code="404">Không tìm thấy kết quả phù hợp</response>
+        [HttpGet("created")]
+        public ActionResult<List<CapitalDataViewModel>> GetByCreator([FromQuery] string publicAddress)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Wrong request");
+            }
+            List<CapitalDataViewModel> capitals = capitalService.GetCapitalsByCreator(publicAddress);
+            if (capitals is null)
+            {
+                return NotFound("Not found");
+            }
+            return Ok(capitals);
+        }
+
+        /// <summary>
+        /// Lấy các khoản vốn mà người dùng có public address đã xác nhận
+        /// </summary>
+        /// <param name="publicAddress"></param>
+        /// <returns></returns>
+        /// <response code="200">Trả về danh sách khoản vốn cần tìm</response>
+        /// <response code="400">Request param sai</response>
+        /// <response code="404">Không tìm thấy kết quả phù hợp</response>
+        [HttpGet("approved")]
+        public ActionResult<List<CapitalDataViewModel>> GetByApprover([FromQuery] string publicAddress)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Wrong request");
+            }
+            List<CapitalDataViewModel> capitals = capitalService.GetCapitalsByApprover(publicAddress);
+            if (capitals is null)
+            {
+                return NotFound("Not found");
+            }
+            return Ok(capitals);
+        }
+
+        /// <summary>
         /// Lấy các khoản vốn trong khoản từ min đến max
         /// </summary>
         /// <param name="min"></param>
         /// <param name="max"></param>
         /// <returns></returns>
+        /// <response code="200">Trả về danh sách khoản vốn cần tìm</response>
+        /// <response code="400">Request param sai</response>
         [HttpGet("value")]
         public ActionResult<List<CapitalDataViewModel>> GetByValue([FromQuery] double min, double max)
         {
@@ -84,6 +132,8 @@ namespace DappAPI.Controllers
         /// </summary>
         /// <param name="keyword"></param>
         /// <returns></returns>
+        /// <response code="200">Trả về danh sách khoản vốn cần tìm</response>
+        /// <response code="400">Request param sai</response>
         [HttpGet("keyword")]
         public ActionResult<List<CapitalDataViewModel>> GetByKeyword([FromQuery] string keyword)
         {
@@ -100,6 +150,8 @@ namespace DappAPI.Controllers
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
+        /// <response code="200">Trả về danh sách khoản vốn cần tìm</response>
+        /// <response code="400">Request param sai</response>
         [HttpGet("type")]
         public ActionResult<List<CapitalDataViewModel>> GetByType(int type)
         {
@@ -121,6 +173,8 @@ namespace DappAPI.Controllers
         /// </summary>
         /// <param name="asset"></param>
         /// <returns></returns>
+        /// <response code="200">Trả về danh sách khoản vốn cần tìm</response>
+        /// <response code="400">Request param sai</response>
         [HttpGet("asset")]
         public ActionResult<List<CapitalDataViewModel>> GetByAsset(int asset)
         {
@@ -142,6 +196,8 @@ namespace DappAPI.Controllers
         /// </summary>
         /// <param name="status"></param>
         /// <returns></returns>
+        /// <response code="200">Trả về danh sách khoản vốn cần tìm</response>
+        /// <response code="400">Request param sai</response>
         [HttpGet("status")]
         public ActionResult<List<CapitalDataViewModel>> GetByStatus(int status)
         {
