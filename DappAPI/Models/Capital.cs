@@ -22,8 +22,18 @@ namespace DappAPI.Models
         [Required]
         public DateTime CreationDate { get; set; }
 
+        public Guid CreatorId { get; set; }
         public DappUser Creator { get; set; }
-        public DappUser Approver { get; set; }
 
+        public Capital(long id, string title, string description, double value, AssetType asset, CapitalType type)
+        {
+            Id = id;
+            Title = title;
+            Description = description;
+            Value = value;
+            Asset = asset;
+            Type = type;
+            CreationDate = DateTime.Today;
+        }
     }
 }

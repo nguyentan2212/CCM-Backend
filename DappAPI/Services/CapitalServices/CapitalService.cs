@@ -8,6 +8,7 @@ using DappAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
 
 namespace DappAPI.Services.CapitalServices
 {
@@ -30,28 +31,11 @@ namespace DappAPI.Services.CapitalServices
             Capital capital = capitalRepo.FirstOrDefault(x => x.Id == id);
             DappUser user = userRepo.FirstOrDefault(x => x.PublicAddress == userAddress);
 
-            if (capital is null || user is null || capital.Status != CapitalStatus.Pending)
+            if (capital is null || user is null)
             {
                 return null;
             }
             capital.Status = CapitalStatus.Cancelled;
-            capital.Approver = user;
-            await work.SaveAsync();
-            CapitalDataViewModel result = mapper.Map<Capital, CapitalDataViewModel>(capital);
-            return result;
-        }
-
-        public async Task<CapitalDataViewModel> ConfirmCapital(long id, string userAddress)
-        {
-            Capital capital = capitalRepo.FirstOrDefault(x => x.Id == id);
-            DappUser user = userRepo.FirstOrDefault(x => x.PublicAddress == userAddress);
-
-            if (capital is null || user is null || capital.Status != CapitalStatus.Pending || capital.Creator.PublicAddress == userAddress)
-            {
-                return null;
-            }
-            capital.Status = CapitalStatus.Confirmed;
-            capital.Approver = user;
             await work.SaveAsync();
             CapitalDataViewModel result = mapper.Map<Capital, CapitalDataViewModel>(capital);
             return result;
@@ -67,7 +51,7 @@ namespace DappAPI.Services.CapitalServices
             Capital capital = mapper.Map<CreateCapitalViewModel, Capital>(request);
             capital.Creator = user;
             capital.CreationDate = DateTime.Today;
-            capital.Status = CapitalStatus.Pending;
+            capital.Status = CapitalStatus.Finished;
             capitalRepo.Add(capital);
             await work.SaveAsync();
             CapitalDataViewModel result = mapper.Map<Capital, CapitalDataViewModel>(capital);
@@ -77,17 +61,6 @@ namespace DappAPI.Services.CapitalServices
         public List<CapitalDataViewModel> GetAllCapitals()
         {
             List<Capital> capitals = capitalRepo.GetAll();
-            if (capitals is null)
-            {
-                return null;
-            }
-            List<CapitalDataViewModel> result = mapper.Map<List<Capital>, List<CapitalDataViewModel>>(capitals);
-            return result;
-        }
-
-        public List<CapitalDataViewModel> GetCapitalsByApprover(string approverAddress)
-        {
-            List<Capital> capitals = capitalRepo.Get(x => x.Approver.PublicAddress == approverAddress);
             if (capitals is null)
             {
                 return null;

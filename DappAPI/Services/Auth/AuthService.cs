@@ -19,11 +19,11 @@ namespace DappAPI.Services.Auth
         }
 
         // Generate JWT from public address and roles
-        public string GenerateToken(string publicAddress, List<string> roles)
+        public string GenerateToken(string userId, List<string> roles)
         {
             var expirationTime = DateTime.UtcNow.AddSeconds(jwtLifespan);
             List<Claim> claims = new List<Claim>();
-            claims.Add(new Claim(ClaimTypes.Name, publicAddress));
+            claims.Add(new Claim(ClaimTypes.Name, userId));
             foreach (var item in roles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, item));

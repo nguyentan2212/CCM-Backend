@@ -86,29 +86,6 @@ namespace DappAPI.Controllers
         }
 
         /// <summary>
-        /// Lấy các khoản vốn mà người dùng có public address đã xác nhận
-        /// </summary>
-        /// <param name="publicAddress"></param>
-        /// <returns></returns>
-        /// <response code="200">Trả về danh sách khoản vốn cần tìm</response>
-        /// <response code="400">Request param sai</response>
-        /// <response code="404">Không tìm thấy kết quả phù hợp</response>
-        [HttpGet("approved")]
-        public ActionResult<List<CapitalDataViewModel>> GetByApprover([FromQuery] string publicAddress)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Wrong request");
-            }
-            List<CapitalDataViewModel> capitals = capitalService.GetCapitalsByApprover(publicAddress);
-            if (capitals is null)
-            {
-                return NotFound("Not found");
-            }
-            return Ok(capitals);
-        }
-
-        /// <summary>
         /// Lấy các khoản vốn trong khoản từ min đến max
         /// </summary>
         /// <param name="min"></param>
@@ -258,27 +235,6 @@ namespace DappAPI.Controllers
                 return BadRequest("Wrong request");
             }
             CapitalDataViewModel capital = await capitalService.UpdateCapital(request);
-            if (capital is null)
-            {
-                return StatusCode(500, "Error occurred");
-            }
-            return Ok(capital);
-        }
-
-        /// <summary>
-        /// Phê duyệt chấp nhận cho khoản vốn được tạo ra
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="publicAddress"></param>
-        /// <returns></returns>
-        [HttpPost("confirm")]
-        public async Task<ActionResult<CapitalDataViewModel>> Confirm(long id, string publicAddress)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Wrong request");
-            }
-            CapitalDataViewModel capital = await capitalService.ConfirmCapital(id, publicAddress);
             if (capital is null)
             {
                 return StatusCode(500, "Error occurred");

@@ -13,13 +13,27 @@ namespace DappAPI.Models
         [Required]
         public string FullName { set; get; }
         [Required]
+        public string Address { get; set; }
+        [Required]
         public DateTime CreationDate { set; get; }
         [Required]
         public long Nonce { get; set; }
-        [Required]
-        public string Address { get; set; }
 
         public List<Capital> CreatedCapitals { get; set; }
-        public List<Capital> ApprovedCapitals { get; set; }
+
+        public DappUser(string publicAddress, string fullName, string email, string phoneNumber, string address)
+        {
+            Random random = new Random();
+
+            PublicAddress = UserName = publicAddress;
+            Id = Guid.NewGuid();
+            SecurityStamp = Id.ToString();
+            FullName = fullName;
+            Email = email;
+            PhoneNumber = phoneNumber;
+            Address = address;
+            Nonce = random.Next(10000, 100000);
+            CreationDate = DateTime.Today;
+        }
     }
 }

@@ -22,17 +22,17 @@ namespace DappAPI.Repositories.CapitalRepositories
 
         public override List<Capital> GetAll()
         {
-            return dbSet.Include(x => x.Approver).Include(y => y.Creator).ToList();
+            return dbSet.Include(y => y.Creator).ToList();
         }
 
         public override List<Capital> Get(Expression<Func<Capital, bool>> predicate)
         {
-            return dbSet.Include(x => x.Approver).Include(y => y.Creator).Where(predicate).ToList();
+            return dbSet.Include(y => y.Creator).Where(predicate).ToList();
         }
 
         public override Capital FirstOrDefault(Expression<Func<Capital, bool>> predicate)
         {
-            return dbSet.Include(x => x.Approver).Include(y => y.Creator).FirstOrDefault(predicate);
+            return dbSet.Include(y => y.Creator).FirstOrDefault(predicate);
         }
     }
 }

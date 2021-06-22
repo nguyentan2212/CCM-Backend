@@ -24,12 +24,10 @@ namespace DappAPI.Extensions.Enums
 
     public enum CapitalStatus
     {
-        [Description("Đang đợi")]
-        Pending,
+        [Description("Hoàn Thành")]
+        Finished,
         [Description("Đã hủy")]
         Cancelled,
-        [Description("Đã xác nhận")]
-        Confirmed,
         [Description("None")]
         None
     }

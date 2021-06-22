@@ -19,12 +19,19 @@ namespace DappAPI.Services.Account
 
         public UserDataViewModel GetUserWithPublicAddress(string publicAddress);
 
-        public Task<UserDataViewModel> CreateUser(RegisterViewModel model);
+        public Task<string> CreateUser(RegisterViewModel model);
 
-        public Task<UserDataViewModel> UpdateUser(UpdateAccountViewModel model);
+        public Task UpdateUser(UpdateAccountViewModel model);
 
-        public Task<UserDataViewModel> Promote(string userId);
+        public Task Promote(string userId);
 
-        public Task<UserDataViewModel> Demote(string userId);
+        public Task Demote(string userId);
+
+        public Task<bool> IsLockout(string userId);
+
+        public Task LockUser(string userId);
+
+        public Task UnlockUser(string userId);
+
     }
 }

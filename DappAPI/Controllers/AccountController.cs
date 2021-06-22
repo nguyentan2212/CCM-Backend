@@ -1,4 +1,5 @@
-﻿using DappAPI.Services.Account;
+﻿using DappAPI.Extensions.Exceptions;
+using DappAPI.Services.Account;
 using DappAPI.Services.Auth;
 using DappAPI.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -49,12 +50,15 @@ namespace DappAPI.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
         public async Task<ActionResult<UserDataViewModel>> GetUser(string userId)
         {
-            UserDataViewModel result = await accountService.GetUserInfo(userId);
-            if (result is null)
+            try
             {
-                return NotFound("User not found");
+                UserDataViewModel result = await accountService.GetUserInfo(userId);
+                return Ok(result);
             }
-            return Ok(result);
+            catch (Exception e)
+            {
+                return NotFound(e.InnerException?.Message);
+            }                      
         }
 
         /// <summary>
@@ -76,13 +80,17 @@ namespace DappAPI.Controllers
             {
                 return BadRequest("Wrong request");
             }
-            long nonce = accountService.GetNonce(publicAddress);
-            if (nonce == 0)
+            try
             {
-                return NotFound("User not found");
+                long nonce = accountService.GetNonce(publicAddress);
+                GetNonceViewModel viewModel = new GetNonceViewModel() { publicAddress = publicAddress, Nonce = nonce };
+                return Ok(viewModel);
             }
-            GetNonceViewModel viewModel = new GetNonceViewModel() { publicAddress = publicAddress, Nonce = nonce };
-            return Ok(viewModel);
+            catch(NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+            
         }
 
         /// <summary>
@@ -117,7 +125,14 @@ namespace DappAPI.Controllers
             {
                 return Unauthorized("Signature verification failed!");
             }
-            // Verification succeeded, change nonce and return JWT
+            // Verification succeeded, check if account is lockout
+            bool isLockout = await accountService.IsLockout(user.Id.ToString());
+            if (isLockout)
+            {
+                return BadRequest("account is lockout");
+            }
+
+            // Verification succeeded, create new user, change nonce and return JWT
             long nonce = await accountService.ChangeNonce(user.PublicAddress);
             List<string> roles = await accountService.GetUserRoles(user.Id.ToString());
             string jwt = authService.GenerateToken(result, roles.ToList());
@@ -138,7 +153,6 @@ namespace DappAPI.Controllers
         /// <response code="200">Register thành công, trả về jwt token</response>
         /// <response code="400">Request param sai</response>
         /// <response code="401">Xác thực không thành công</response>
-        /// <response code="409">User đã tồn tại</response>
         [AllowAnonymous]
         [HttpPost("register")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -151,26 +165,27 @@ namespace DappAPI.Controllers
             {
                 return BadRequest("Wrong request");
             }
-            // Check if account with same public address already exits.
-            UserDataViewModel user = accountService.GetUserWithPublicAddress(request.PublicAddress);
-            if (user != null)
-            {
-                return Conflict("This account already exits");
-            }
+            // Check if account with same public address already exits.         
             
             // Verification succeeded, create new user, change nonce and return JWT
-            user = await accountService.CreateUser(request);
-            long nonce = await accountService.ChangeNonce(user.PublicAddress);
-            List<string> roles = await accountService.GetUserRoles(user.Id.ToString());
-            string jwt = authService.GenerateToken(user.PublicAddress, roles.ToList());
-            LoginResultViewModel loginResult = new LoginResultViewModel()
+            try
             {
-                Jwt = jwt,
-                Id = user.Id,
-                FullName = user.FullName,
-                PublicAddress = user.PublicAddress
-            };
-            return Ok(loginResult);
+                string userId = await accountService.CreateUser(request);
+                List<string> roles = await accountService.GetUserRoles(userId);
+                string jwt = authService.GenerateToken(userId, roles.ToList());
+                LoginResultViewModel loginResult = new LoginResultViewModel()
+                {
+                    Jwt = jwt,
+                    Id = userId,
+                    FullName = request.FullName,
+                    PublicAddress = request.PublicAddress
+                };
+                return Ok(loginResult);
+            }
+            catch( DataSaveException e)
+            {
+                return Unauthorized(e.Message);
+            }
         }
 
         /// <summary>
@@ -180,23 +195,92 @@ namespace DappAPI.Controllers
         /// <returns>User info</returns>
         /// <response code="200">Update thành công, trả về user sau khi update</response>
         /// <response code="400">Request param sai</response>
-        /// <response code="404">Không tifm thấy user</response>
+        /// <response code="404">Không tìm thấy user</response>
         [HttpPost("update")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(string))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(string))]
-        public async Task<ActionResult<UserDataViewModel>> UpdateUser([FromBody] UpdateAccountViewModel request)
+        public async Task<ActionResult> UpdateUser([FromBody] UpdateAccountViewModel request)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest("Wrong request");
             }           
-            UserDataViewModel user = await accountService.UpdateUser(request);  
-            if (user is null)
+            try
             {
-                return NotFound("User not found");
+                await accountService.UpdateUser(request);
+                return Ok();
             }
-            return Ok(user);
+            catch(NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+            catch(DataSaveException e)
+            {
+                return BadRequest(e.Message);
+            }
+            
+        }
+
+        /// <summary>
+        /// lock account
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns>User info</returns>
+        /// <response code="200">Locked thành công, trả về user sau khi update</response>
+        /// <response code="400">Request param sai</response>
+        /// <response code="404">Không tìm thấy user</response>
+        [HttpGet("locked")]
+        public async Task<ActionResult> Locked(string userId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Wrong request");
+            }
+            try
+            {
+                await accountService.LockUser(userId);
+                return Ok();
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+            catch(DataSaveException e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        /// <summary>
+        /// unlock account
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns>User info</returns>
+        /// <response code="200">Unlocked thành công, trả về user sau khi update</response>
+        /// <response code="400">Request param sai</response>
+        /// <response code="404">Không tìm thấy user</response>
+        [HttpGet("unlocked")]
+        public async Task<ActionResult> Unlocked(string userId)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest("Wrong request");
+            }
+            try
+            {
+                await accountService.UnlockUser(userId);
+                return Ok();
+            }
+            catch (NotFoundException e)
+            {
+                return NotFound(e.Message);
+            }
+            catch (DataSaveException e)
+            {
+                return BadRequest(e.Message);
+            }
+
         }
     }
 }

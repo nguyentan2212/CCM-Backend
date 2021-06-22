@@ -22,17 +22,17 @@ namespace DappAPI.Repositories.AccountRepositories
 
         public override List<DappUser> GetAll()
         {
-            return dbSet.Include(x => x.ApprovedCapitals).Include(y => y.CreatedCapitals).ToList();
+            return dbSet.Include(y => y.CreatedCapitals).ToList();
         }
 
         public override List<DappUser> Get(Expression<Func<DappUser, bool>> predicate)
         {
-            return dbSet.Include(x => x.ApprovedCapitals).Include(y => y.CreatedCapitals).Where(predicate).ToList();
+            return dbSet.Include(y => y.CreatedCapitals).Where(predicate).ToList();
         }
 
         public override DappUser FirstOrDefault(Expression<Func<DappUser, bool>> predicate)
         {
-            return dbSet.Include(x => x.ApprovedCapitals).Include(y => y.CreatedCapitals).FirstOrDefault(predicate);
+            return dbSet.Include(y => y.CreatedCapitals).FirstOrDefault(predicate);
         }
     }
 }

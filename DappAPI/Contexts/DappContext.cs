@@ -1,7 +1,9 @@
-﻿using DappAPI.Models;
+﻿using DappAPI.Extensions.Enums;
+using DappAPI.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections.Generic;
 
 namespace DappAPI.Contexts
 {
@@ -11,25 +13,19 @@ namespace DappAPI.Contexts
         {
 
         }
+        public void a()
+        {
+
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<DappUser>()
-                .HasMany(a => a.CreatedCapitals)
-                .WithOne(b => b.Creator)
-                .OnDelete(DeleteBehavior.NoAction);
-
-            modelBuilder.Entity<DappUser>()
-                .HasMany(a => a.ApprovedCapitals)
-                .WithOne(b => b.Approver)
-                .OnDelete(DeleteBehavior.NoAction);
-
             modelBuilder.Seed();
         }
 
         public DbSet<DappUser> AppUsers { get; set; }
         public DbSet<Capital> Capitals { get; set; }
+
     }
 }

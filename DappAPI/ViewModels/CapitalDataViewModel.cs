@@ -23,7 +23,6 @@ namespace DappAPI.ViewModels
         [Required]
         public string Status { get; set; }
         public string Creator { get; set; }
-        public string Approver { get; set; }
         [Required]
         public DateTime CreationDate { get; set; }
     }

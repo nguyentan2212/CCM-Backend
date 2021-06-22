@@ -3,14 +3,16 @@ using System;
 using DappAPI.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DappAPI.Migrations
 {
     [DbContext(typeof(DappContext))]
-    partial class DappContextModelSnapshot : ModelSnapshot
+    [Migration("20210622111716_initdb")]
+    partial class initdb
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
