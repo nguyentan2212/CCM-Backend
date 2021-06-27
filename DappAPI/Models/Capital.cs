@@ -12,7 +12,7 @@ namespace DappAPI.Models
         public string Title { get; set; }
         public string Description { get; set; }
         [Required]
-        public double Value { get; set; }
+        public long Value { get; set; }
         [Required]
         public AssetType Asset { get; set; }
         [Required]
@@ -25,7 +25,12 @@ namespace DappAPI.Models
         public Guid CreatorId { get; set; }
         public DappUser Creator { get; set; }
 
-        public Capital(long id, string title, string description, double value, AssetType asset, CapitalType type)
+        public Capital()
+        {
+
+        }
+
+        public Capital(long id, string title, string description, long value, AssetType asset, CapitalType type)
         {
             Id = id;
             Title = title;

@@ -27,8 +27,6 @@ namespace DappAPI.Services.Account
 
         public Task Demote(string userId);
 
-        public Task<bool> IsLockout(string userId);
-
         public Task LockUser(string userId);
 
         public Task UnlockUser(string userId);

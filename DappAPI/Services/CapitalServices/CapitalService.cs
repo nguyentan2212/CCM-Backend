@@ -18,23 +18,19 @@ namespace DappAPI.Services.CapitalServices
         private readonly IMapper mapper;
         private readonly Repository<Capital> capitalRepo;
         private readonly Repository<DappUser> userRepo;
+        private readonly Repository<Utility> utilityRepo;
         public CapitalService(IUnitOfWork work, IMapper mapper)
         {
             this.work = work;
             this.mapper = mapper;
             capitalRepo = new CapitalRepository(work.CreateRepository<Capital>());
             userRepo = work.CreateRepository<DappUser>();
+            utilityRepo = work.CreateRepository<Utility>();
         }
 
-        public async Task<CapitalDataViewModel> CancelCapital(long id, string userAddress)
+        public async Task<CapitalDataViewModel> CancelCapital(long id)
         {
             Capital capital = capitalRepo.FirstOrDefault(x => x.Id == id);
-            DappUser user = userRepo.FirstOrDefault(x => x.PublicAddress == userAddress);
-
-            if (capital is null || user is null)
-            {
-                return null;
-            }
             capital.Status = CapitalStatus.Cancelled;
             await work.SaveAsync();
             CapitalDataViewModel result = mapper.Map<Capital, CapitalDataViewModel>(capital);
@@ -80,9 +76,9 @@ namespace DappAPI.Services.CapitalServices
             return result;
         }
 
-        public List<CapitalDataViewModel> GetCapitalsByCreator(string creatorAddress)
+        public List<CapitalDataViewModel> GetCapitalsByCreator(string userId)
         {
-            List<Capital> capitals = capitalRepo.Get(x => x.Creator.PublicAddress == creatorAddress);
+            List<Capital> capitals = capitalRepo.Get(x => x.CreatorId == Guid.Parse(userId));
             if (capitals is null)
             {
                 return null;
@@ -138,7 +134,7 @@ namespace DappAPI.Services.CapitalServices
             return result;
         }
 
-        public List<CapitalDataViewModel> GetCapitalsByValue(double from, double to)
+        public List<CapitalDataViewModel> GetCapitalsByValue(long from, long to)
         {
             List<Capital> capitals = capitalRepo.Get(x => from <= x.Value && x.Value <= to);
             if (capitals is null)
@@ -147,6 +143,11 @@ namespace DappAPI.Services.CapitalServices
             }
             List<CapitalDataViewModel> result = mapper.Map<List<Capital>, List<CapitalDataViewModel>>(capitals);
             return result;
+        }
+
+        public long GetTotalMoney()
+        {
+            return utilityRepo.FirstOrDefault(x => true).TotalMoney;
         }
 
         public async Task<CapitalDataViewModel> UpdateCapital(UpdateCapitalViewModel request)

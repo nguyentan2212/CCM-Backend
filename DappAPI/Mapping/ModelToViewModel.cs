@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using DappAPI.Extensions.Enums;
 using DappAPI.Models;
 using DappAPI.ViewModels;
 
@@ -12,10 +11,11 @@ namespace DappAPI.Mapping
             CreateMap<DappUser, UserDataViewModel>()
                 .ForMember(des => des.Id, opt => opt.MapFrom(src => src.Id));
             CreateMap<Capital, CapitalDataViewModel>()
-                .ForMember(des => des.Creator, opt => opt.MapFrom(src => src.Creator.PublicAddress))
-                .ForMember(des => des.Asset, opt => opt.MapFrom(src => src.Asset.ToDescriptionString()))
-                .ForMember(des => des.Type, opt => opt.MapFrom(src => src.Type.ToDescriptionString()))
-                .ForMember(des => des.Status, opt => opt.MapFrom(src => src.Status.ToDescriptionString()));
+                .ForMember(des => des.Creator, opt => opt.MapFrom(src => src.Creator.Id.ToString()))
+                .ForMember(des => des.Asset, opt => opt.MapFrom(src => src.Asset.ToString()))
+                .ForMember(des => des.Type, opt => opt.MapFrom(src => src.Type.ToString()))
+                .ForMember(des => des.Status, opt => opt.MapFrom(src => src.Status.ToString()))
+                .ForMember(des => des.CreatorName, opt => opt.MapFrom(src => src.Creator.FullName)); ;
         }
     }
 }

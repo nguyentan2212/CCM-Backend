@@ -9,7 +9,7 @@ namespace DappAPI.ViewModels
         public string Title { get; set; }
         public string Description { get; set; }
         [Required]
-        public double Value { get; set; }
+        public long Value { get; set; }
         [Required]
         public AssetType Asset { get; set; }
         [Required]

@@ -16,8 +16,8 @@ namespace DappAPI.Extensions.Enums
     {
         [Description("Vốn chủ sở hữu")]
         Equity,
-        [Description("Vốn huy động")]
-        Mobilized,
+        [Description("Vốn lưu động")]
+        Working,
         [Description("None")]
         None
     }

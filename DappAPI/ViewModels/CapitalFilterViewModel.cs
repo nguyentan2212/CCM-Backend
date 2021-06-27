@@ -8,8 +8,8 @@ namespace DappAPI.ViewModels
         public AssetType? Asset { get; set; }
         public CapitalType? Type { get; set; }
         public CapitalStatus? Status { get; set; }
-        public double? ValueMin { get; set; }
-        public double? ValueMax { get; set; }
+        public long? ValueMin { get; set; }
+        public long? ValueMax { get; set; }
         public int? count { get; set; }
     }
 }

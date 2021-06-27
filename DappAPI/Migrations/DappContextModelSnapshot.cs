@@ -44,8 +44,8 @@ namespace DappAPI.Migrations
                     b.Property<int>("Type")
                         .HasColumnType("INTEGER");
 
-                    b.Property<double>("Value")
-                        .HasColumnType("REAL");
+                    b.Property<long>("Value")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -58,601 +58,601 @@ namespace DappAPI.Migrations
                         {
                             Id = 1L,
                             Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("6e7dc7c9-8b12-4d82-a980-43aad555f6b4"),
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("57b22cff-3a1c-47a2-8381-cfb56b91a637"),
                             Description = "Đây là mô tả về khoản vốn số 1, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 1",
                             Type = 1,
-                            Value = 3720000.0
+                            Value = 9150000L
                         },
                         new
                         {
                             Id = 2L,
                             Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("8a7f9c38-6c1d-4c6e-8ce9-277f1df30a47"),
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("5ee1d9f4-1fbb-4f32-a593-8b26b1fec323"),
                             Description = "Đây là mô tả về khoản vốn số 2, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 2",
-                            Type = 0,
-                            Value = 9520000.0
+                            Type = 1,
+                            Value = 14400000L
                         },
                         new
                         {
                             Id = 3L,
-                            Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("8f1d72c9-f533-43ae-a981-70e3fee41908"),
+                            Asset = 0,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("c8bc295e-e32c-4bc1-9a09-5ded9bd81e34"),
                             Description = "Đây là mô tả về khoản vốn số 3, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 3",
-                            Type = 0,
-                            Value = 20490000.0
+                            Type = 1,
+                            Value = 27810000L
                         },
                         new
                         {
                             Id = 4L,
-                            Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("89735130-eb06-4f09-a02e-a647a44431f2"),
+                            Asset = 0,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("8528ddb0-c3f0-4577-b019-50219816304e"),
                             Description = "Đây là mô tả về khoản vốn số 4, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 4",
-                            Type = 1,
-                            Value = 600000.0
+                            Type = 0,
+                            Value = 34840000L
                         },
                         new
                         {
                             Id = 5L,
                             Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("40b9034b-b896-412b-8bf4-ccdc7f1d742d"),
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("7b046999-1150-4914-932c-64980e7732e5"),
                             Description = "Đây là mô tả về khoản vốn số 5, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 5",
                             Type = 0,
-                            Value = 49750000.0
+                            Value = 20900000L
                         },
                         new
                         {
                             Id = 6L,
-                            Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("5ca35383-e8d0-4c7e-9d20-5980131ee42d"),
+                            Asset = 0,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("4673aa5a-c45a-48a5-b9f0-a842c5e91ef9"),
                             Description = "Đây là mô tả về khoản vốn số 6, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 6",
-                            Type = 0,
-                            Value = 39300000.0
+                            Type = 1,
+                            Value = 32040000L
                         },
                         new
                         {
                             Id = 7L,
                             Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("d3b5a4f3-ad29-4c36-aafd-de4a2e68d0b1"),
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("fb609d93-bb65-4571-9bb6-d156a7c0b5d2"),
                             Description = "Đây là mô tả về khoản vốn số 7, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 7",
-                            Type = 0,
-                            Value = 49560000.0
+                            Type = 1,
+                            Value = 54460000L
                         },
                         new
                         {
                             Id = 8L,
-                            Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("8f1d72c9-f533-43ae-a981-70e3fee41908"),
+                            Asset = 0,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("5ee1d9f4-1fbb-4f32-a593-8b26b1fec323"),
                             Description = "Đây là mô tả về khoản vốn số 8, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 8",
-                            Type = 0,
-                            Value = 70480000.0
+                            Type = 1,
+                            Value = 17760000L
                         },
                         new
                         {
                             Id = 9L,
-                            Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("5ca35383-e8d0-4c7e-9d20-5980131ee42d"),
+                            Asset = 0,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("941cd15c-91e0-4ae4-b0c7-a31f9636432e"),
                             Description = "Đây là mô tả về khoản vốn số 9, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 9",
                             Type = 1,
-                            Value = 67950000.0
+                            Value = 5310000L
                         },
                         new
                         {
                             Id = 10L,
-                            Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("e32b6c81-631b-407d-a2cb-f29c74a87bfd"),
+                            Asset = 0,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("fb609d93-bb65-4571-9bb6-d156a7c0b5d2"),
                             Description = "Đây là mô tả về khoản vốn số 10, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 10",
-                            Type = 0,
-                            Value = 22300000.0
+                            Type = 1,
+                            Value = 70400000L
                         },
                         new
                         {
                             Id = 11L,
                             Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("c9548d10-9ee3-43dc-ae67-ec2fe24e77b9"),
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("5ee1d9f4-1fbb-4f32-a593-8b26b1fec323"),
                             Description = "Đây là mô tả về khoản vốn số 11, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 11",
-                            Type = 0,
-                            Value = 48620000.0
+                            Type = 1,
+                            Value = 87010000L
                         },
                         new
                         {
                             Id = 12L,
-                            Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("d3b5a4f3-ad29-4c36-aafd-de4a2e68d0b1"),
+                            Asset = 1,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("8528ddb0-c3f0-4577-b019-50219816304e"),
                             Description = "Đây là mô tả về khoản vốn số 12, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 12",
                             Type = 0,
-                            Value = 117720000.0
+                            Value = 105600000L
                         },
                         new
                         {
                             Id = 13L,
-                            Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("8f1d72c9-f533-43ae-a981-70e3fee41908"),
+                            Asset = 0,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("7b046999-1150-4914-932c-64980e7732e5"),
                             Description = "Đây là mô tả về khoản vốn số 13, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 13",
-                            Type = 1,
-                            Value = 7280000.0
+                            Type = 0,
+                            Value = 50960000L
                         },
                         new
                         {
                             Id = 14L,
-                            Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("89735130-eb06-4f09-a02e-a647a44431f2"),
+                            Asset = 0,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("5ee1d9f4-1fbb-4f32-a593-8b26b1fec323"),
                             Description = "Đây là mô tả về khoản vốn số 14, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 14",
                             Type = 0,
-                            Value = 14980000.0
+                            Value = 37940000L
                         },
                         new
                         {
                             Id = 15L,
-                            Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("40b9034b-b896-412b-8bf4-ccdc7f1d742d"),
+                            Asset = 1,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("8528ddb0-c3f0-4577-b019-50219816304e"),
                             Description = "Đây là mô tả về khoản vốn số 15, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 15",
                             Type = 0,
-                            Value = 143250000.0
+                            Value = 42300000L
                         },
                         new
                         {
                             Id = 16L,
-                            Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("c9548d10-9ee3-43dc-ae67-ec2fe24e77b9"),
+                            Asset = 0,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("4673aa5a-c45a-48a5-b9f0-a842c5e91ef9"),
                             Description = "Đây là mô tả về khoản vốn số 16, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 16",
-                            Type = 0,
-                            Value = 29440000.0
+                            Type = 1,
+                            Value = 119840000L
                         },
                         new
                         {
                             Id = 17L,
                             Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("6e7dc7c9-8b12-4d82-a980-43aad555f6b4"),
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("5ee1d9f4-1fbb-4f32-a593-8b26b1fec323"),
                             Description = "Đây là mô tả về khoản vốn số 17, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 17",
-                            Type = 0,
-                            Value = 87210000.0
+                            Type = 1,
+                            Value = 47090000L
                         },
                         new
                         {
                             Id = 18L,
-                            Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("5ca35383-e8d0-4c7e-9d20-5980131ee42d"),
+                            Asset = 1,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("c8bc295e-e32c-4bc1-9a09-5ded9bd81e34"),
                             Description = "Đây là mô tả về khoản vốn số 18, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 18",
                             Type = 1,
-                            Value = 160200000.0
+                            Value = 128160000L
                         },
                         new
                         {
                             Id = 19L,
-                            Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("89735130-eb06-4f09-a02e-a647a44431f2"),
+                            Asset = 0,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("5ee1d9f4-1fbb-4f32-a593-8b26b1fec323"),
                             Description = "Đây là mô tả về khoản vốn số 19, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 19",
                             Type = 1,
-                            Value = 89870000.0
+                            Value = 30780000L
                         },
                         new
                         {
                             Id = 20L,
                             Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("8a7f9c38-6c1d-4c6e-8ce9-277f1df30a47"),
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("8528ddb0-c3f0-4577-b019-50219816304e"),
                             Description = "Đây là mô tả về khoản vốn số 20, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 20",
-                            Type = 0,
-                            Value = 77200000.0
+                            Type = 1,
+                            Value = 88000000L
                         },
                         new
                         {
                             Id = 21L,
-                            Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("c9548d10-9ee3-43dc-ae67-ec2fe24e77b9"),
+                            Asset = 0,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("57b22cff-3a1c-47a2-8381-cfb56b91a637"),
                             Description = "Đây là mô tả về khoản vốn số 21, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 21",
                             Type = 1,
-                            Value = 200340000.0
+                            Value = 87990000L
                         },
                         new
                         {
                             Id = 22L,
                             Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("8a7f9c38-6c1d-4c6e-8ce9-277f1df30a47"),
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("c8bc295e-e32c-4bc1-9a09-5ded9bd81e34"),
                             Description = "Đây là mô tả về khoản vốn số 22, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 22",
-                            Type = 1,
-                            Value = 45980000.0
+                            Type = 0,
+                            Value = 137060000L
                         },
                         new
                         {
                             Id = 23L,
-                            Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("89735130-eb06-4f09-a02e-a647a44431f2"),
+                            Asset = 0,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("4673aa5a-c45a-48a5-b9f0-a842c5e91ef9"),
                             Description = "Đây là mô tả về khoản vốn số 23, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 23",
-                            Type = 1,
-                            Value = 116380000.0
+                            Type = 0,
+                            Value = 163760000L
                         },
                         new
                         {
                             Id = 24L,
                             Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("8f1d72c9-f533-43ae-a981-70e3fee41908"),
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("fb609d93-bb65-4571-9bb6-d156a7c0b5d2"),
                             Description = "Đây là mô tả về khoản vốn số 24, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 24",
-                            Type = 0,
-                            Value = 32160000.0
+                            Type = 1,
+                            Value = 20160000L
                         },
                         new
                         {
                             Id = 25L,
-                            Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("cff10220-1d6f-459c-ac8a-c4e49f5372cc"),
+                            Asset = 1,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("c8bc295e-e32c-4bc1-9a09-5ded9bd81e34"),
                             Description = "Đây là mô tả về khoản vốn số 25, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 25",
                             Type = 0,
-                            Value = 112250000.0
+                            Value = 90750000L
                         },
                         new
                         {
                             Id = 26L,
                             Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("8f1d72c9-f533-43ae-a981-70e3fee41908"),
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("5ee1d9f4-1fbb-4f32-a593-8b26b1fec323"),
                             Description = "Đây là mô tả về khoản vốn số 26, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 26",
                             Type = 1,
-                            Value = 120380000.0
+                            Value = 166140000L
                         },
                         new
                         {
                             Id = 27L,
                             Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("8a7f9c38-6c1d-4c6e-8ce9-277f1df30a47"),
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("8528ddb0-c3f0-4577-b019-50219816304e"),
                             Description = "Đây là mô tả về khoản vốn số 27, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 27",
                             Type = 0,
-                            Value = 93150000.0
+                            Value = 160650000L
                         },
                         new
                         {
                             Id = 28L,
                             Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("e32b6c81-631b-407d-a2cb-f29c74a87bfd"),
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("57b22cff-3a1c-47a2-8381-cfb56b91a637"),
                             Description = "Đây là mô tả về khoản vốn số 28, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 28",
                             Type = 0,
-                            Value = 244720000.0
+                            Value = 136920000L
                         },
                         new
                         {
                             Id = 29L,
                             Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("d3b5a4f3-ad29-4c36-aafd-de4a2e68d0b1"),
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("fb609d93-bb65-4571-9bb6-d156a7c0b5d2"),
                             Description = "Đây là mô tả về khoản vốn số 29, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 29",
-                            Type = 0,
-                            Value = 283910000.0
+                            Type = 1,
+                            Value = 278110000L
                         },
                         new
                         {
                             Id = 30L,
                             Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("40b9034b-b896-412b-8bf4-ccdc7f1d742d"),
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("c8bc295e-e32c-4bc1-9a09-5ded9bd81e34"),
                             Description = "Đây là mô tả về khoản vốn số 30, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 30",
-                            Type = 1,
-                            Value = 42300000.0
+                            Type = 0,
+                            Value = 155700000L
                         },
                         new
                         {
                             Id = 31L,
                             Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("c9548d10-9ee3-43dc-ae67-ec2fe24e77b9"),
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("941cd15c-91e0-4ae4-b0c7-a31f9636432e"),
                             Description = "Đây là mô tả về khoản vốn số 31, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 31",
                             Type = 1,
-                            Value = 13950000.0
+                            Value = 142910000L
                         },
                         new
                         {
                             Id = 32L,
                             Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("8a7f9c38-6c1d-4c6e-8ce9-277f1df30a47"),
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("c8bc295e-e32c-4bc1-9a09-5ded9bd81e34"),
                             Description = "Đây là mô tả về khoản vốn số 32, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 32",
-                            Type = 0,
-                            Value = 255680000.0
+                            Type = 1,
+                            Value = 136960000L
                         },
                         new
                         {
                             Id = 33L,
-                            Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("6e7dc7c9-8b12-4d82-a980-43aad555f6b4"),
+                            Asset = 0,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("7b046999-1150-4914-932c-64980e7732e5"),
                             Description = "Đây là mô tả về khoản vốn số 33, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 33",
                             Type = 0,
-                            Value = 170610000.0
+                            Value = 149160000L
                         },
                         new
                         {
                             Id = 34L,
-                            Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("d3b5a4f3-ad29-4c36-aafd-de4a2e68d0b1"),
+                            Asset = 1,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("57b22cff-3a1c-47a2-8381-cfb56b91a637"),
                             Description = "Đây là mô tả về khoản vốn số 34, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 34",
                             Type = 1,
-                            Value = 5440000.0
+                            Value = 281180000L
                         },
                         new
                         {
                             Id = 35L,
-                            Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("40b9034b-b896-412b-8bf4-ccdc7f1d742d"),
+                            Asset = 0,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("8528ddb0-c3f0-4577-b019-50219816304e"),
                             Description = "Đây là mô tả về khoản vốn số 35, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 35",
                             Type = 1,
-                            Value = 289450000.0
+                            Value = 309750000L
                         },
                         new
                         {
                             Id = 36L,
                             Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("40b9034b-b896-412b-8bf4-ccdc7f1d742d"),
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("c8bc295e-e32c-4bc1-9a09-5ded9bd81e34"),
                             Description = "Đây là mô tả về khoản vốn số 36, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 36",
                             Type = 0,
-                            Value = 46800000.0
+                            Value = 20160000L
                         },
                         new
                         {
                             Id = 37L,
-                            Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("c9548d10-9ee3-43dc-ae67-ec2fe24e77b9"),
+                            Asset = 0,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("c8bc295e-e32c-4bc1-9a09-5ded9bd81e34"),
                             Description = "Đây là mô tả về khoản vốn số 37, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 37",
                             Type = 1,
-                            Value = 174270000.0
+                            Value = 324120000L
                         },
                         new
                         {
                             Id = 38L,
-                            Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("40b9034b-b896-412b-8bf4-ccdc7f1d742d"),
+                            Asset = 0,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("c8bc295e-e32c-4bc1-9a09-5ded9bd81e34"),
                             Description = "Đây là mô tả về khoản vốn số 38, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 38",
                             Type = 1,
-                            Value = 33440000.0
+                            Value = 178600000L
                         },
                         new
                         {
                             Id = 39L,
                             Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("d3b5a4f3-ad29-4c36-aafd-de4a2e68d0b1"),
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("5ee1d9f4-1fbb-4f32-a593-8b26b1fec323"),
                             Description = "Đây là mô tả về khoản vốn số 39, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 39",
                             Type = 0,
-                            Value = 220740000.0
+                            Value = 288600000L
                         },
                         new
                         {
                             Id = 40L,
                             Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("e32b6c81-631b-407d-a2cb-f29c74a87bfd"),
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("c8bc295e-e32c-4bc1-9a09-5ded9bd81e34"),
                             Description = "Đây là mô tả về khoản vốn số 40, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 40",
-                            Type = 1,
-                            Value = 265600000.0
+                            Type = 0,
+                            Value = 148800000L
                         },
                         new
                         {
                             Id = 41L,
                             Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("c9548d10-9ee3-43dc-ae67-ec2fe24e77b9"),
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("8528ddb0-c3f0-4577-b019-50219816304e"),
                             Description = "Đây là mô tả về khoản vốn số 41, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 41",
                             Type = 1,
-                            Value = 368180000.0
+                            Value = 226320000L
                         },
                         new
                         {
                             Id = 42L,
-                            Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("89735130-eb06-4f09-a02e-a647a44431f2"),
+                            Asset = 1,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("57b22cff-3a1c-47a2-8381-cfb56b91a637"),
                             Description = "Đây là mô tả về khoản vốn số 42, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 42",
-                            Type = 1,
-                            Value = 34860000.0
+                            Type = 0,
+                            Value = 199500000L
                         },
                         new
                         {
                             Id = 43L,
-                            Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("cff10220-1d6f-459c-ac8a-c4e49f5372cc"),
+                            Asset = 1,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("fb609d93-bb65-4571-9bb6-d156a7c0b5d2"),
                             Description = "Đây là mô tả về khoản vốn số 43, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 43",
-                            Type = 1,
-                            Value = 198230000.0
+                            Type = 0,
+                            Value = 218870000L
                         },
                         new
                         {
                             Id = 44L,
-                            Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("d3b5a4f3-ad29-4c36-aafd-de4a2e68d0b1"),
+                            Asset = 0,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("8528ddb0-c3f0-4577-b019-50219816304e"),
                             Description = "Đây là mô tả về khoản vốn số 44, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 44",
                             Type = 1,
-                            Value = 350240000.0
+                            Value = 383680000L
                         },
                         new
                         {
                             Id = 45L,
-                            Asset = 1,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("89735130-eb06-4f09-a02e-a647a44431f2"),
+                            Asset = 0,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("fb609d93-bb65-4571-9bb6-d156a7c0b5d2"),
                             Description = "Đây là mô tả về khoản vốn số 45, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 45",
                             Type = 1,
-                            Value = 192600000.0
+                            Value = 238500000L
                         },
                         new
                         {
                             Id = 46L,
-                            Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("8f1d72c9-f533-43ae-a981-70e3fee41908"),
+                            Asset = 1,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("8528ddb0-c3f0-4577-b019-50219816304e"),
                             Description = "Đây là mô tả về khoản vốn số 46, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 46",
                             Type = 0,
-                            Value = 442060000.0
+                            Value = 337180000L
                         },
                         new
                         {
                             Id = 47L,
                             Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("d3b5a4f3-ad29-4c36-aafd-de4a2e68d0b1"),
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("fb609d93-bb65-4571-9bb6-d156a7c0b5d2"),
                             Description = "Đây là mô tả về khoản vốn số 47, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 47",
                             Type = 1,
-                            Value = 167790000.0
+                            Value = 219490000L
                         },
                         new
                         {
                             Id = 48L,
-                            Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("6e7dc7c9-8b12-4d82-a980-43aad555f6b4"),
+                            Asset = 1,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("c8bc295e-e32c-4bc1-9a09-5ded9bd81e34"),
                             Description = "Đây là mô tả về khoản vốn số 48, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 48",
                             Type = 1,
-                            Value = 414720000.0
+                            Value = 210720000L
                         },
                         new
                         {
                             Id = 49L,
-                            Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("40b9034b-b896-412b-8bf4-ccdc7f1d742d"),
+                            Asset = 1,
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("5ee1d9f4-1fbb-4f32-a593-8b26b1fec323"),
                             Description = "Đây là mô tả về khoản vốn số 49, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 49",
-                            Type = 0,
-                            Value = 439040000.0
+                            Type = 1,
+                            Value = 438060000L
                         },
                         new
                         {
                             Id = 50L,
                             Asset = 0,
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            CreatorId = new Guid("6e7dc7c9-8b12-4d82-a980-43aad555f6b4"),
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
+                            CreatorId = new Guid("57b22cff-3a1c-47a2-8381-cfb56b91a637"),
                             Description = "Đây là mô tả về khoản vốn số 50, khoản vốn này được tạo bởi code-behind.",
                             Status = 0,
                             Title = "Khoản vốn số 50",
-                            Type = 1,
-                            Value = 348500000.0
+                            Type = 0,
+                            Value = 232500000L
                         });
                 });
 
@@ -686,6 +686,9 @@ namespace DappAPI.Migrations
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("INTEGER");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("INTEGER");
@@ -741,193 +744,163 @@ namespace DappAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("40b9034b-b896-412b-8bf4-ccdc7f1d742d"),
+                            Id = new Guid("57b22cff-3a1c-47a2-8381-cfb56b91a637"),
                             AccessFailedCount = 0,
                             Address = "Long An",
-                            ConcurrencyStamp = "d1417119-0c2f-461e-bf7f-287d7a68cdde",
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
+                            ConcurrencyStamp = "69cc3896-f3b7-443f-b546-6f33c104be37",
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Email = "minhtan@gmail.com",
                             EmailConfirmed = false,
                             FullName = "Nguyễn Minh Tân",
+                            IsActive = true,
                             LockoutEnabled = false,
-                            Nonce = 18865L,
+                            Nonce = 97188L,
                             PhoneNumber = "0123456789",
                             PhoneNumberConfirmed = false,
                             PublicAddress = "0x7e576E3FFdFf96581f035B29B2E084299b72900c",
-                            SecurityStamp = "40b9034b-b896-412b-8bf4-ccdc7f1d742d",
+                            SecurityStamp = "57b22cff-3a1c-47a2-8381-cfb56b91a637",
                             TwoFactorEnabled = false,
                             UserName = "0x7e576E3FFdFf96581f035B29B2E084299b72900c"
                         },
                         new
                         {
-                            Id = new Guid("6e7dc7c9-8b12-4d82-a980-43aad555f6b4"),
+                            Id = new Guid("8528ddb0-c3f0-4577-b019-50219816304e"),
                             AccessFailedCount = 0,
                             Address = "Tiền Giang",
-                            ConcurrencyStamp = "128d465e-0f64-4cdf-8d2c-f0fd7939dde5",
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
+                            ConcurrencyStamp = "0a540f00-cff4-458f-bf76-74ea5401ea64",
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Email = "trungthuan@gmail.com",
                             EmailConfirmed = false,
                             FullName = "Đỗ Trung Thuận",
+                            IsActive = true,
                             LockoutEnabled = false,
-                            Nonce = 42147L,
+                            Nonce = 32003L,
                             PhoneNumber = "0123456789",
                             PhoneNumberConfirmed = false,
                             PublicAddress = "0x21cE7DdE449766dF2855392D5cCf3Fe0A0728956",
-                            SecurityStamp = "6e7dc7c9-8b12-4d82-a980-43aad555f6b4",
+                            SecurityStamp = "8528ddb0-c3f0-4577-b019-50219816304e",
                             TwoFactorEnabled = false,
                             UserName = "0x21cE7DdE449766dF2855392D5cCf3Fe0A0728956"
                         },
                         new
                         {
-                            Id = new Guid("8a7f9c38-6c1d-4c6e-8ce9-277f1df30a47"),
+                            Id = new Guid("fb609d93-bb65-4571-9bb6-d156a7c0b5d2"),
                             AccessFailedCount = 0,
                             Address = "Đồng Tháp",
-                            ConcurrencyStamp = "3141262d-f8d6-457c-a35e-fa92ef182033",
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
+                            ConcurrencyStamp = "3d9f1cce-05dc-49ef-9fa0-5b4c3e2d30c3",
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Email = "thanhdat@gmail.com",
                             EmailConfirmed = false,
                             FullName = "Võ Thành Đạt",
+                            IsActive = true,
                             LockoutEnabled = false,
-                            Nonce = 20455L,
+                            Nonce = 15749L,
                             PhoneNumber = "0123456789",
                             PhoneNumberConfirmed = false,
                             PublicAddress = "0xA5346041f7663aA9868CF17868De08B114D6D6e9",
-                            SecurityStamp = "8a7f9c38-6c1d-4c6e-8ce9-277f1df30a47",
+                            SecurityStamp = "fb609d93-bb65-4571-9bb6-d156a7c0b5d2",
                             TwoFactorEnabled = false,
                             UserName = "0xA5346041f7663aA9868CF17868De08B114D6D6e9"
                         },
                         new
                         {
-                            Id = new Guid("cff10220-1d6f-459c-ac8a-c4e49f5372cc"),
+                            Id = new Guid("7b046999-1150-4914-932c-64980e7732e5"),
                             AccessFailedCount = 0,
                             Address = "Tp Hồ Chí Minh",
-                            ConcurrencyStamp = "e8aba088-06e9-4728-a5fe-28865c3533ce",
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
+                            ConcurrencyStamp = "c53c6884-6f8e-4f38-ab57-87a2687818eb",
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Email = "thituyet@gmail.com",
                             EmailConfirmed = false,
                             FullName = "Nguyễn Thị Tuyết",
+                            IsActive = true,
                             LockoutEnabled = false,
-                            Nonce = 44180L,
+                            Nonce = 66156L,
                             PhoneNumber = "0123456789",
                             PhoneNumberConfirmed = false,
                             PublicAddress = "0x6C328b00c3DE595e129f7e5156cBc911bf0a4f0f",
-                            SecurityStamp = "cff10220-1d6f-459c-ac8a-c4e49f5372cc",
+                            SecurityStamp = "7b046999-1150-4914-932c-64980e7732e5",
                             TwoFactorEnabled = false,
                             UserName = "0x6C328b00c3DE595e129f7e5156cBc911bf0a4f0f"
                         },
                         new
                         {
-                            Id = new Guid("5ca35383-e8d0-4c7e-9d20-5980131ee42d"),
+                            Id = new Guid("941cd15c-91e0-4ae4-b0c7-a31f9636432e"),
                             AccessFailedCount = 0,
                             Address = "Bình Phước",
-                            ConcurrencyStamp = "6a53c834-4cd1-4497-ba75-ffc2690f2e56",
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
+                            ConcurrencyStamp = "8f03711c-cb2f-4282-aa1b-ccd5b430642f",
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Email = "vantrung@gmail.com",
                             EmailConfirmed = false,
                             FullName = "Trần Văn Trung",
+                            IsActive = true,
                             LockoutEnabled = false,
-                            Nonce = 50797L,
+                            Nonce = 52875L,
                             PhoneNumber = "0123456789",
                             PhoneNumberConfirmed = false,
                             PublicAddress = "0x7d30398b31d20285Ba473e918DD3aCa63fa5621D",
-                            SecurityStamp = "5ca35383-e8d0-4c7e-9d20-5980131ee42d",
+                            SecurityStamp = "941cd15c-91e0-4ae4-b0c7-a31f9636432e",
                             TwoFactorEnabled = false,
                             UserName = "0x7d30398b31d20285Ba473e918DD3aCa63fa5621D"
                         },
                         new
                         {
-                            Id = new Guid("e32b6c81-631b-407d-a2cb-f29c74a87bfd"),
+                            Id = new Guid("5ee1d9f4-1fbb-4f32-a593-8b26b1fec323"),
                             AccessFailedCount = 0,
                             Address = "Bến Tre",
-                            ConcurrencyStamp = "380333e5-1fca-4714-9b65-971a05ffa969",
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
+                            ConcurrencyStamp = "8b4b2fc9-5fd7-4591-b185-29cfd93142a3",
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Email = "thanhtuyen@gmail.com",
                             EmailConfirmed = false,
                             FullName = "Nguyễn Thị Thanh Tuyền",
+                            IsActive = true,
                             LockoutEnabled = false,
-                            Nonce = 67357L,
+                            Nonce = 13545L,
                             PhoneNumber = "0123456789",
                             PhoneNumberConfirmed = false,
                             PublicAddress = "0x7686d4E7238F18C43a3F5D9004c5B9913EC094f6",
-                            SecurityStamp = "e32b6c81-631b-407d-a2cb-f29c74a87bfd",
+                            SecurityStamp = "5ee1d9f4-1fbb-4f32-a593-8b26b1fec323",
                             TwoFactorEnabled = false,
                             UserName = "0x7686d4E7238F18C43a3F5D9004c5B9913EC094f6"
                         },
                         new
                         {
-                            Id = new Guid("d3b5a4f3-ad29-4c36-aafd-de4a2e68d0b1"),
+                            Id = new Guid("4673aa5a-c45a-48a5-b9f0-a842c5e91ef9"),
                             AccessFailedCount = 0,
                             Address = "Tp Hồ Chí Minh",
-                            ConcurrencyStamp = "11888aac-45c1-4b8c-8f44-7485934f6e12",
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
+                            ConcurrencyStamp = "609ed9ea-5e31-4aa8-9232-173af22b5f54",
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Email = "minhnhat@gmail.com",
                             EmailConfirmed = false,
                             FullName = "Trần Minh Nhật",
+                            IsActive = true,
                             LockoutEnabled = false,
-                            Nonce = 46845L,
+                            Nonce = 92102L,
                             PhoneNumber = "0123456789",
                             PhoneNumberConfirmed = false,
                             PublicAddress = "0xa30bB9f78044F8E304dB5bdb8F888780722635e5",
-                            SecurityStamp = "d3b5a4f3-ad29-4c36-aafd-de4a2e68d0b1",
+                            SecurityStamp = "4673aa5a-c45a-48a5-b9f0-a842c5e91ef9",
                             TwoFactorEnabled = false,
                             UserName = "0xa30bB9f78044F8E304dB5bdb8F888780722635e5"
                         },
                         new
                         {
-                            Id = new Guid("8f1d72c9-f533-43ae-a981-70e3fee41908"),
+                            Id = new Guid("c8bc295e-e32c-4bc1-9a09-5ded9bd81e34"),
                             AccessFailedCount = 0,
                             Address = "Hà Nội",
-                            ConcurrencyStamp = "a50c2fba-4e30-4b0d-8d78-dd2363123f68",
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
+                            ConcurrencyStamp = "3ca7748f-1822-44d6-8a66-3c73c77f4f12",
+                            CreationDate = new DateTime(2021, 6, 27, 0, 0, 0, 0, DateTimeKind.Local),
                             Email = "nhatlinh@gmail.com",
                             EmailConfirmed = false,
                             FullName = "Ngô Nhật Linh",
+                            IsActive = true,
                             LockoutEnabled = false,
-                            Nonce = 65159L,
+                            Nonce = 87125L,
                             PhoneNumber = "0123456789",
                             PhoneNumberConfirmed = false,
                             PublicAddress = "0x25cc8c93bbFDf2D544f2F28FB9fb6fdC8be93019",
-                            SecurityStamp = "8f1d72c9-f533-43ae-a981-70e3fee41908",
+                            SecurityStamp = "c8bc295e-e32c-4bc1-9a09-5ded9bd81e34",
                             TwoFactorEnabled = false,
                             UserName = "0x25cc8c93bbFDf2D544f2F28FB9fb6fdC8be93019"
-                        },
-                        new
-                        {
-                            Id = new Guid("89735130-eb06-4f09-a02e-a647a44431f2"),
-                            AccessFailedCount = 0,
-                            Address = "Cần Thơ",
-                            ConcurrencyStamp = "ac453507-09ec-4115-a91c-1e6c75de2dbe",
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            Email = "thuhien@gmail.com",
-                            EmailConfirmed = false,
-                            FullName = "Nguyễn Thị Thu Hiền",
-                            LockoutEnabled = false,
-                            Nonce = 35095L,
-                            PhoneNumber = "0123456789",
-                            PhoneNumberConfirmed = false,
-                            PublicAddress = "0xEE7E6221739929881EF431692788D68ba852F788",
-                            SecurityStamp = "89735130-eb06-4f09-a02e-a647a44431f2",
-                            TwoFactorEnabled = false,
-                            UserName = "0xEE7E6221739929881EF431692788D68ba852F788"
-                        },
-                        new
-                        {
-                            Id = new Guid("c9548d10-9ee3-43dc-ae67-ec2fe24e77b9"),
-                            AccessFailedCount = 0,
-                            Address = "Vũng Tàu",
-                            ConcurrencyStamp = "67dec69d-584e-4b5e-818e-298d8ffeb350",
-                            CreationDate = new DateTime(2021, 6, 22, 0, 0, 0, 0, DateTimeKind.Local),
-                            Email = "thanhhien@gmail.com",
-                            EmailConfirmed = false,
-                            FullName = "Lê Thanh Hiển",
-                            LockoutEnabled = false,
-                            Nonce = 91919L,
-                            PhoneNumber = "0123456789",
-                            PhoneNumberConfirmed = false,
-                            PublicAddress = "0xBf581651E6Fd1681aA0F42e5Fc0aC8a288237E8d",
-                            SecurityStamp = "c9548d10-9ee3-43dc-ae67-ec2fe24e77b9",
-                            TwoFactorEnabled = false,
-                            UserName = "0xBf581651E6Fd1681aA0F42e5Fc0aC8a288237E8d"
                         });
                 });
 
@@ -960,15 +933,36 @@ namespace DappAPI.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("05211189-8430-489b-909f-1243a2b78e97"),
-                            ConcurrencyStamp = "40f3da60-cc40-414d-891d-ce62c5ff7499",
+                            Id = new Guid("676382df-01bb-4b2d-8855-fe82ec1caba4"),
+                            ConcurrencyStamp = "763eb9c0-3644-4ab5-8894-a81deeaf869c",
                             Name = "admin"
                         },
                         new
                         {
-                            Id = new Guid("ce6fbecf-e6b2-4852-8371-434c8e279cac"),
-                            ConcurrencyStamp = "f2fea001-b51b-4f8e-8a4d-b433c0e47aa3",
+                            Id = new Guid("d4a7faf2-c2fc-4520-ac08-5db7eb8aa1c8"),
+                            ConcurrencyStamp = "b7484871-464f-40fb-aac6-cec5b867112a",
                             Name = "staff"
+                        });
+                });
+
+            modelBuilder.Entity("DappAPI.Models.Utility", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<long>("TotalMoney")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Utilities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1L,
+                            TotalMoney = 7107050000L
                         });
                 });
 
@@ -1054,53 +1048,43 @@ namespace DappAPI.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = new Guid("40b9034b-b896-412b-8bf4-ccdc7f1d742d"),
-                            RoleId = new Guid("05211189-8430-489b-909f-1243a2b78e97")
+                            UserId = new Guid("57b22cff-3a1c-47a2-8381-cfb56b91a637"),
+                            RoleId = new Guid("676382df-01bb-4b2d-8855-fe82ec1caba4")
                         },
                         new
                         {
-                            UserId = new Guid("6e7dc7c9-8b12-4d82-a980-43aad555f6b4"),
-                            RoleId = new Guid("05211189-8430-489b-909f-1243a2b78e97")
+                            UserId = new Guid("8528ddb0-c3f0-4577-b019-50219816304e"),
+                            RoleId = new Guid("676382df-01bb-4b2d-8855-fe82ec1caba4")
                         },
                         new
                         {
-                            UserId = new Guid("8a7f9c38-6c1d-4c6e-8ce9-277f1df30a47"),
-                            RoleId = new Guid("05211189-8430-489b-909f-1243a2b78e97")
+                            UserId = new Guid("fb609d93-bb65-4571-9bb6-d156a7c0b5d2"),
+                            RoleId = new Guid("d4a7faf2-c2fc-4520-ac08-5db7eb8aa1c8")
                         },
                         new
                         {
-                            UserId = new Guid("cff10220-1d6f-459c-ac8a-c4e49f5372cc"),
-                            RoleId = new Guid("ce6fbecf-e6b2-4852-8371-434c8e279cac")
+                            UserId = new Guid("7b046999-1150-4914-932c-64980e7732e5"),
+                            RoleId = new Guid("d4a7faf2-c2fc-4520-ac08-5db7eb8aa1c8")
                         },
                         new
                         {
-                            UserId = new Guid("5ca35383-e8d0-4c7e-9d20-5980131ee42d"),
-                            RoleId = new Guid("ce6fbecf-e6b2-4852-8371-434c8e279cac")
+                            UserId = new Guid("941cd15c-91e0-4ae4-b0c7-a31f9636432e"),
+                            RoleId = new Guid("d4a7faf2-c2fc-4520-ac08-5db7eb8aa1c8")
                         },
                         new
                         {
-                            UserId = new Guid("e32b6c81-631b-407d-a2cb-f29c74a87bfd"),
-                            RoleId = new Guid("ce6fbecf-e6b2-4852-8371-434c8e279cac")
+                            UserId = new Guid("5ee1d9f4-1fbb-4f32-a593-8b26b1fec323"),
+                            RoleId = new Guid("d4a7faf2-c2fc-4520-ac08-5db7eb8aa1c8")
                         },
                         new
                         {
-                            UserId = new Guid("d3b5a4f3-ad29-4c36-aafd-de4a2e68d0b1"),
-                            RoleId = new Guid("ce6fbecf-e6b2-4852-8371-434c8e279cac")
+                            UserId = new Guid("4673aa5a-c45a-48a5-b9f0-a842c5e91ef9"),
+                            RoleId = new Guid("d4a7faf2-c2fc-4520-ac08-5db7eb8aa1c8")
                         },
                         new
                         {
-                            UserId = new Guid("8f1d72c9-f533-43ae-a981-70e3fee41908"),
-                            RoleId = new Guid("ce6fbecf-e6b2-4852-8371-434c8e279cac")
-                        },
-                        new
-                        {
-                            UserId = new Guid("89735130-eb06-4f09-a02e-a647a44431f2"),
-                            RoleId = new Guid("ce6fbecf-e6b2-4852-8371-434c8e279cac")
-                        },
-                        new
-                        {
-                            UserId = new Guid("c9548d10-9ee3-43dc-ae67-ec2fe24e77b9"),
-                            RoleId = new Guid("ce6fbecf-e6b2-4852-8371-434c8e279cac")
+                            UserId = new Guid("c8bc295e-e32c-4bc1-9a09-5ded9bd81e34"),
+                            RoleId = new Guid("d4a7faf2-c2fc-4520-ac08-5db7eb8aa1c8")
                         });
                 });
 

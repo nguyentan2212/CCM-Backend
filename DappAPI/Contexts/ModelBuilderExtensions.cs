@@ -11,6 +11,7 @@ namespace DappAPI.Contexts
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
+            int userCount = 8;
             UserRole admin = new UserRole()
             {
                 Id = Guid.NewGuid(),
@@ -34,13 +35,13 @@ namespace DappAPI.Contexts
                 new DappUser("0x7686d4E7238F18C43a3F5D9004c5B9913EC094f6", "Nguyễn Thị Thanh Tuyền", "thanhtuyen@gmail.com", "0123456789", "Bến Tre"),
                 new DappUser("0xa30bB9f78044F8E304dB5bdb8F888780722635e5", "Trần Minh Nhật", "minhnhat@gmail.com", "0123456789", "Tp Hồ Chí Minh"),             
                 new DappUser("0x25cc8c93bbFDf2D544f2F28FB9fb6fdC8be93019", "Ngô Nhật Linh", "nhatlinh@gmail.com", "0123456789", "Hà Nội"),
-                new DappUser("0xEE7E6221739929881EF431692788D68ba852F788", "Nguyễn Thị Thu Hiền", "thuhien@gmail.com", "0123456789", "Cần Thơ"),
-                new DappUser("0xBf581651E6Fd1681aA0F42e5Fc0aC8a288237E8d", "Lê Thanh Hiển", "thanhhien@gmail.com", "0123456789", "Vũng Tàu")
+                //new DappUser("0xEE7E6221739929881EF431692788D68ba852F788", "Nguyễn Thị Thu Hiền", "thuhien@gmail.com", "0123456789", "Cần Thơ"),
+                //new DappUser("0xBf581651E6Fd1681aA0F42e5Fc0aC8a288237E8d", "Lê Thanh Hiển", "thanhhien@gmail.com", "0123456789", "Vũng Tàu")
             };
             modelBuilder.Entity<DappUser>().HasData(users);
 
             List<IdentityUserRole<Guid>> userRoles = new List<IdentityUserRole<Guid>>();
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 2; i++)
             {
                 userRoles.Add(new IdentityUserRole<Guid>()
                 {
@@ -48,7 +49,7 @@ namespace DappAPI.Contexts
                     UserId = users[i].Id
                 });
             }
-            for (int i = 3; i < 10; i++)
+            for (int i = 2; i < userCount; i++)
             {
                 userRoles.Add(new IdentityUserRole<Guid>()
                 {
@@ -59,19 +60,22 @@ namespace DappAPI.Contexts
             modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(userRoles);
 
             List<Capital> capitals = new List<Capital>();
+            long total = 0;
             for (int i = 1; i <= 50; i++)
             {
                 string title = $"Khoản vốn số {i}";
                 string description = $"Đây là mô tả về khoản vốn số {i}, khoản vốn này được tạo bởi code-behind.";
-                double value = i * random.Next(1, 1000) * 10000;
+                long value = i * random.Next(1, 1000) * 10000;
+                total += value;
                 int asset = random.Next(2);
                 int type = random.Next(2);
-                int user = random.Next(10);
+                int user = random.Next(userCount);
                 Capital capital = new Capital(i, title, description, value, (AssetType)asset, (CapitalType)type);
                 capital.CreatorId = users[user].Id;
                 capitals.Add(capital);
             }
             modelBuilder.Entity<Capital>().HasData(capitals);
+            modelBuilder.Entity<Utility>().HasData(new Utility() { Id = 1, TotalMoney = total });
         }
     }
 }

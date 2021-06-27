@@ -18,8 +18,15 @@ namespace DappAPI.Models
         public DateTime CreationDate { set; get; }
         [Required]
         public long Nonce { get; set; }
+        [Required]
+        public bool IsActive { get; set; }
 
         public List<Capital> CreatedCapitals { get; set; }
+
+        public DappUser()
+        {
+            IsActive = true;
+        }
 
         public DappUser(string publicAddress, string fullName, string email, string phoneNumber, string address)
         {
@@ -34,6 +41,7 @@ namespace DappAPI.Models
             Address = address;
             Nonce = random.Next(10000, 100000);
             CreationDate = DateTime.Today;
+            IsActive = true;
         }
     }
 }

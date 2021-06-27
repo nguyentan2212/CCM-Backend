@@ -17,14 +17,18 @@ namespace DappAPI.Services.Account
     {
         private readonly IUnitOfWork work;
         private readonly UserManager<DappUser> userManager;
+        private readonly RoleManager<UserRole> roleManager;
         private Repository<DappUser> userRepo;
+        private Repository<IdentityUserRole<Guid>> userRoleRepo;
         private readonly IMapper mapper;
 
-        public AccountService(IUnitOfWork work, UserManager<DappUser> userManager, IMapper mapper)
+        public AccountService(IUnitOfWork work, UserManager<DappUser> userManager, RoleManager<UserRole> roleManager, IMapper mapper)
         {
             this.work = work;
             this.userManager = userManager;
+            this.roleManager = roleManager;
             userRepo = new AccountReposity(work.CreateRepository<DappUser>());
+            userRoleRepo = work.CreateRepository<IdentityUserRole<Guid>>();
             this.mapper = mapper;
         }
 
@@ -50,17 +54,29 @@ namespace DappAPI.Services.Account
 
         public async Task<string> CreateUser(RegisterViewModel model)
         {
-            DappUser user = mapper.Map<RegisterViewModel, DappUser>(model);
-            userRepo.Add(user);
             try
             {
+
+                DappUser user = userRepo.FirstOrDefault(x => x.PublicAddress == model.PublicAddress);
+                if (user != null)
+                {
+                    throw new Exception("Registration failed");
+                }
+                user = mapper.Map<RegisterViewModel, DappUser>(model);
+                userRepo.Add(user);
                 Random random = new Random();
                 user.Nonce = random.Next(10000, 100000);
                 await work.SaveAsync();
-                await userManager.AddToRoleAsync(user, "admin");
+                UserRole admin = roleManager.Roles.FirstOrDefault(x => x.Name == "admin");
+                userRoleRepo.Add(new IdentityUserRole<Guid>()
+                {
+                    RoleId = admin.Id,
+                    UserId = user.Id
+                });
+                await work.SaveAsync();
                 return user.Id.ToString();
             }
-            catch
+            catch(Exception e)
             {
                 throw new DataSaveException("Registration failed");
             }
@@ -120,6 +136,10 @@ namespace DappAPI.Services.Account
         public async Task<UserDataViewModel> GetUserInfo(string userId)
         {
             DappUser user = await userManager.FindByIdAsync(userId);
+            if (user is null)
+            {
+                throw new NotFoundException("User not found");
+            }
             UserDataViewModel result = mapper.Map<DappUser, UserDataViewModel>(user);
             result.Role = GetUserRoles(user.Id.ToString()).GetAwaiter().GetResult().LastOrDefault();
             return result;
@@ -145,9 +165,18 @@ namespace DappAPI.Services.Account
             }
             try
             {
-                await userManager.AddToRoleAsync(user, "admin");
+                UserRole admin = roleManager.Roles.FirstOrDefault(x => x.Name == "admin");
+                List<IdentityUserRole<Guid>> list = userRoleRepo.GetAll();
+                IdentityUserRole<Guid> result = list.FirstOrDefault(x => x.UserId.ToString() == userId);
+                userRoleRepo.Remove(result);
+                userRoleRepo.Add(new IdentityUserRole<Guid>()
+                {
+                    RoleId = admin.Id,
+                    UserId = user.Id
+                });
+                await work.SaveAsync();
             }
-            catch
+            catch(Exception e)
             {
                 throw new DataSaveException("Failed promotion");
             }
@@ -163,7 +192,16 @@ namespace DappAPI.Services.Account
             }
             try
             {
-                await userManager.RemoveFromRoleAsync(user, "staff");
+                UserRole staff = roleManager.Roles.FirstOrDefault(x => x.Name == "staff");
+                List<IdentityUserRole<Guid>> list = userRoleRepo.GetAll();
+                IdentityUserRole<Guid> result = list.FirstOrDefault(x => x.UserId.ToString() == userId);
+                userRoleRepo.Remove(result);
+                userRoleRepo.Add(new IdentityUserRole<Guid>()
+                {
+                    RoleId = staff.Id,
+                    UserId = user.Id
+                });
+                await work.SaveAsync();
             }
             catch
             {
@@ -179,7 +217,7 @@ namespace DappAPI.Services.Account
             {
                 throw new NotFoundException("User not found");
             }
-            user.LockoutEnabled = true;
+            user.IsActive = false;
             try
             {
                 await work.SaveAsync();
@@ -197,7 +235,7 @@ namespace DappAPI.Services.Account
             {
                 throw new NotFoundException("User not found");
             }
-            user.LockoutEnabled = false;
+            user.IsActive = true;
             try
             {
                 await work.SaveAsync();
@@ -206,12 +244,6 @@ namespace DappAPI.Services.Account
             {
                 throw new DataSaveException("Failed to unlock user");
             }
-        }
-
-        public async Task<bool> IsLockout(string userId)
-        {
-            DappUser user = await userManager.FindByIdAsync(userId);
-            return user.LockoutEnabled;
         }
     }
 }

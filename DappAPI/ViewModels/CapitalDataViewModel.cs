@@ -15,14 +15,17 @@ namespace DappAPI.ViewModels
         public string Title { get; set; }
         public string Description { get; set; }
         [Required]
-        public double Value { get; set; }
+        public long Value { get; set; }
         [Required]
         public string Asset { get; set; }
         [Required]
         public string Type { get; set; }
         [Required]
         public string Status { get; set; }
+        [Required]
         public string Creator { get; set; }
+        [Required]
+        public string CreatorName { get; set; }
         [Required]
         public DateTime CreationDate { get; set; }
     }

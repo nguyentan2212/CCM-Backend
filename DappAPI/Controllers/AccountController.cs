@@ -126,8 +126,7 @@ namespace DappAPI.Controllers
                 return Unauthorized("Signature verification failed!");
             }
             // Verification succeeded, check if account is lockout
-            bool isLockout = await accountService.IsLockout(user.Id.ToString());
-            if (isLockout)
+            if (!user.IsActive)
             {
                 return BadRequest("account is lockout");
             }
@@ -136,11 +135,12 @@ namespace DappAPI.Controllers
             long nonce = await accountService.ChangeNonce(user.PublicAddress);
             List<string> roles = await accountService.GetUserRoles(user.Id.ToString());
             string jwt = authService.GenerateToken(result, roles.ToList());
-            LoginResultViewModel loginResult = new LoginResultViewModel(){
+            LoginResultViewModel loginResult = new LoginResultViewModel() {
                 Jwt = jwt,
                 Id = user.Id,
                 FullName = user.FullName,
-                PublicAddress = user.PublicAddress
+                PublicAddress = user.PublicAddress,
+                Role = roles.LastOrDefault()
             };
             return Ok(loginResult);
         }
@@ -178,7 +178,8 @@ namespace DappAPI.Controllers
                     Jwt = jwt,
                     Id = userId,
                     FullName = request.FullName,
-                    PublicAddress = request.PublicAddress
+                    PublicAddress = request.PublicAddress,
+                    Role = roles.LastOrDefault()
                 };
                 return Ok(loginResult);
             }
@@ -223,15 +224,16 @@ namespace DappAPI.Controllers
         }
 
         /// <summary>
-        /// lock account
+        /// lock and unlocked account
         /// </summary>
         /// <param name="userId"></param>
+        /// <param name="isLocked"></param>
         /// <returns>User info</returns>
-        /// <response code="200">Locked thành công, trả về user sau khi update</response>
+        /// <response code="200">Locked, Unlocked thành công, trả về user sau khi update</response>
         /// <response code="400">Request param sai</response>
         /// <response code="404">Không tìm thấy user</response>
-        [HttpGet("locked")]
-        public async Task<ActionResult> Locked(string userId)
+        [HttpPost("locked")]
+        public async Task<ActionResult> Locked(string userId, bool isLocked)
         {
             if (!ModelState.IsValid)
             {
@@ -239,7 +241,14 @@ namespace DappAPI.Controllers
             }
             try
             {
-                await accountService.LockUser(userId);
+                if (isLocked)
+                {
+                    await accountService.LockUser(userId);
+                }
+                else
+                {
+                    await accountService.UnlockUser(userId);
+                }
                 return Ok();
             }
             catch (NotFoundException e)
@@ -253,15 +262,16 @@ namespace DappAPI.Controllers
         }
 
         /// <summary>
-        /// unlock account
+        /// promote and demote account
         /// </summary>
         /// <param name="userId"></param>
+        /// <param name="isPromote"></param>
         /// <returns>User info</returns>
-        /// <response code="200">Unlocked thành công, trả về user sau khi update</response>
+        /// <response code="200">promote, demote thành công, trả về user sau khi update</response>
         /// <response code="400">Request param sai</response>
         /// <response code="404">Không tìm thấy user</response>
-        [HttpGet("unlocked")]
-        public async Task<ActionResult> Unlocked(string userId)
+        [HttpPost("promote")]
+        public async Task<ActionResult> Promote(string userId, bool isPromote)
         {
             if (!ModelState.IsValid)
             {
@@ -269,7 +279,14 @@ namespace DappAPI.Controllers
             }
             try
             {
-                await accountService.UnlockUser(userId);
+                if (isPromote)
+                {
+                    await accountService.Promote(userId);
+                }
+                else
+                {
+                    await accountService.Demote(userId);
+                }
                 return Ok();
             }
             catch (NotFoundException e)
