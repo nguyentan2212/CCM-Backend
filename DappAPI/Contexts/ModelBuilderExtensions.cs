@@ -59,23 +59,29 @@ namespace DappAPI.Contexts
             }
             modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(userRoles);
 
+            int capitalCount = 150;
+            List<int> monthOfCapital = new List<int>(1);
+            for (int i = 1; i <= capitalCount+10; i++)
+            {
+                int value = random.Next(0, 12);
+                monthOfCapital.Add(value);
+            }
+            monthOfCapital.Sort();
             List<Capital> capitals = new List<Capital>();
-            long total = 0;
-            for (int i = 1; i <= 50; i++)
+            for (int i = 1; i <= capitalCount; i++)
             {
                 string title = $"Khoản vốn số {i}";
-                string description = $"Đây là mô tả về khoản vốn số {i}, khoản vốn này được tạo bởi code-behind.";
+                string description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis lobortis in arcu eget ultricies. Morbi imperdiet eros interdum, hendrerit leo eu, gravida massa. Aliquam auctor, velit nec convallis mollis, diam lacus finibus dolor, pulvinar rutrum lectus magna cursus sem. Praesent placerat tortor finibus nunc placerat varius. Nunc porta, ex sit amet bibendum rutrum, justo sapien tempor erat, eu varius lectus felis in nibh. Vivamus vel sodales ipsum, cursus dapibus ipsum. Suspendisse ac nunc consectetur, malesuada odio eget, aliquam nisl. Proin non egestas lectus, at condimentum nibh. Fusce placerat aliquet sem. Nunc pellentesque a massa a rutrum. Ut maximus nulla sed quam interdum elementum et vitae ligula. Donec vel sapien nec tellus pulvinar pellentesque ut non lacus. Morbi non turpis orci. Suspendisse auctor, magna et lobortis suscipit, odio tellus imperdiet neque, et aliquam urna ipsum accumsan nisi. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.";
                 long value = i * random.Next(1, 1000) * 10000;
-                total += value;
                 int asset = random.Next(2);
                 int type = random.Next(2);
                 int user = random.Next(userCount);
                 Capital capital = new Capital(i, title, description, value, (AssetType)asset, (CapitalType)type);
+                capital.CreationDate = DateTime.Today.AddMonths(-monthOfCapital[i]);
                 capital.CreatorId = users[user].Id;
                 capitals.Add(capital);
             }
             modelBuilder.Entity<Capital>().HasData(capitals);
-            modelBuilder.Entity<Utility>().HasData(new Utility() { Id = 1, TotalMoney = total });
         }
     }
 }

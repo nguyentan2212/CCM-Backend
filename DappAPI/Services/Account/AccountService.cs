@@ -10,6 +10,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using DappAPI.Extensions.Exceptions;
+using DappAPI.Extensions.Enums;
 
 namespace DappAPI.Services.Account
 {
@@ -244,6 +245,24 @@ namespace DappAPI.Services.Account
             {
                 throw new DataSaveException("Failed to unlock user");
             }
+        }
+
+        public List<TopUserViewModel> GetTopUsers(int number)
+        {
+            List<DappUser> users = userRepo.GetAll();
+            List<TopUserViewModel> result = users.Select(x => new TopUserViewModel()
+            {
+                Id = x.Id.ToString(),
+                FullName = x.FullName,
+                Email = x.Email,
+                PhoneNumber = x.PhoneNumber,
+                TotalCapital = x.CreatedCapitals.Where(x => x.Status == CapitalStatus.Finished).Sum(x => x.Value)
+            }).OrderByDescending(x => x.TotalCapital).ToList();
+            foreach (var item in result)
+            {
+                item.Role = GetUserRoles(item.Id).GetAwaiter().GetResult().LastOrDefault();
+            }
+            return result.Take(number).ToList();
         }
     }
 }

@@ -5,10 +5,10 @@ using DappAPI.Repositories.UnitOfWork;
 using DappAPI.Services.Account;
 using DappAPI.Services.Auth;
 using DappAPI.Services.CapitalServices;
+using DappAPI.Services.Statistical;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -75,6 +75,7 @@ namespace DappAPI
             services.AddAutoMapper(typeof(ViewModelToModel));
             services.AddScoped<IAccountService, AccountService>();
             services.AddScoped<ICapitalService, CapitalService>();
+            services.AddScoped<IStatisticalService, StatisticalService>();
             services.AddControllers(options => options.Filters.Add(new AuthorizeFilter()));
             services.AddSwaggerGen(c =>
             {

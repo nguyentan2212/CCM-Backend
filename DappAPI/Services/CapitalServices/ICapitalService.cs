@@ -18,6 +18,5 @@ namespace DappAPI.Services.CapitalServices
         public Task<CapitalDataViewModel> CancelCapital(long id);
         public Task<CapitalDataViewModel> CreateCapital(CreateCapitalViewModel request);
         public Task<CapitalDataViewModel> UpdateCapital(UpdateCapitalViewModel request);
-        public long GetTotalMoney();
     }
 }

@@ -26,7 +26,5 @@ namespace DappAPI.Contexts
 
         public DbSet<DappUser> AppUsers { get; set; }
         public DbSet<Capital> Capitals { get; set; }
-        public DbSet<Utility> Utilities { get; set; }
-
     }
 }

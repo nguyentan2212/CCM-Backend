@@ -31,5 +31,7 @@ namespace DappAPI.Services.Account
 
         public Task UnlockUser(string userId);
 
+        public List<TopUserViewModel> GetTopUsers(int number);
+
     }
 }

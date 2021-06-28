@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DappAPI.Services.CapitalServices;
+﻿using DappAPI.Services.CapitalServices;
 using DappAPI.ViewModels;
 using Microsoft.AspNetCore.Authorization;
-using DappAPI.Extensions.Enums;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DappAPI.Controllers
 {
@@ -81,121 +78,6 @@ namespace DappAPI.Controllers
                 return NotFound("Not found");
             }
             return Ok(capitals);
-        }
-
-        ///// <summary>
-        ///// Lấy các khoản vốn trong khoản từ min đến max
-        ///// </summary>
-        ///// <param name="min"></param>
-        ///// <param name="max"></param>
-        ///// <returns></returns>
-        ///// <response code="200">Trả về danh sách khoản vốn cần tìm</response>
-        ///// <response code="400">Request param sai</response>
-        //[HttpGet("value")]
-        //public ActionResult<List<CapitalDataViewModel>> GetByValue([FromQuery] long min, long max)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest("Wrong request");
-        //    }
-        //    List<CapitalDataViewModel> capitals = capitalService.GetCapitalsByValue(min, max);
-        //    return Ok(capitals);
-        //}
-
-        ///// <summary>
-        ///// Lấy các khoản vốn có chứa keyword trong tiêu đề hoặc miêu tả
-        ///// </summary>
-        ///// <param name="keyword"></param>
-        ///// <returns></returns>
-        ///// <response code="200">Trả về danh sách khoản vốn cần tìm</response>
-        ///// <response code="400">Request param sai</response>
-        //[HttpGet("keyword")]
-        //public ActionResult<List<CapitalDataViewModel>> GetByKeyword([FromQuery] string keyword)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest("Wrong request");
-        //    }
-        //    List<CapitalDataViewModel> capitals = capitalService.GetCapitalsByKeyword(keyword);
-        //    return Ok(capitals);
-        //}
-
-        ///// <summary>
-        ///// Lấy khoản vốn có type như yêu cầu
-        ///// </summary>
-        ///// <param name="type"></param>
-        ///// <returns></returns>
-        ///// <response code="200">Trả về danh sách khoản vốn cần tìm</response>
-        ///// <response code="400">Request param sai</response>
-        //[HttpGet("type")]
-        //public ActionResult<List<CapitalDataViewModel>> GetByType(int type)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest("Wrong request");
-        //    }
-             
-        //    List<CapitalDataViewModel> capitals = capitalService.GetCapitalsByType((CapitalType)type);
-        //    if (capitals is null)
-        //    {
-        //        return NotFound("Not found");
-        //    }
-        //    return Ok(capitals);
-        //}
-
-        ///// <summary>
-        ///// Lấy khoản vốn có asset type như yêu cầu
-        ///// </summary>
-        ///// <param name="asset"></param>
-        ///// <returns></returns>
-        ///// <response code="200">Trả về danh sách khoản vốn cần tìm</response>
-        ///// <response code="400">Request param sai</response>
-        //[HttpGet("asset")]
-        //public ActionResult<List<CapitalDataViewModel>> GetByAsset(int asset)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest("Wrong request");
-        //    }
-
-        //    List<CapitalDataViewModel> capitals = capitalService.GetCapitalsByAsset((AssetType)asset);
-        //    if (capitals is null)
-        //    {
-        //        return NotFound("Not found");
-        //    }
-        //    return Ok(capitals);
-        //}
-
-        ///// <summary>
-        ///// Lấy khoản vốn có trạng thái như yêu cầu
-        ///// </summary>
-        ///// <param name="status"></param>
-        ///// <returns></returns>
-        ///// <response code="200">Trả về danh sách khoản vốn cần tìm</response>
-        ///// <response code="400">Request param sai</response>
-        //[HttpGet("status")]
-        //public ActionResult<List<CapitalDataViewModel>> GetByStatus(int status)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest("Wrong request");
-        //    }
-        //    List<CapitalDataViewModel> capitals = capitalService.GetCapitalsByStatus((CapitalStatus)status);
-        //    if (capitals is null)
-        //    {
-        //        return NotFound("Not found");
-        //    }
-        //    return Ok(capitals);
-        //}
-
-        /// <summary>
-        /// Lấy tổng số tiền có trong công ty
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet("totalmoney")]
-        public ActionResult<long> GetTotalMoney()
-        {
-            return Ok(capitalService.GetTotalMoney());
         }
 
         /// <summary>

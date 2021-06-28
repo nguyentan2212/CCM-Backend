@@ -18,14 +18,12 @@ namespace DappAPI.Services.CapitalServices
         private readonly IMapper mapper;
         private readonly Repository<Capital> capitalRepo;
         private readonly Repository<DappUser> userRepo;
-        private readonly Repository<Utility> utilityRepo;
         public CapitalService(IUnitOfWork work, IMapper mapper)
         {
             this.work = work;
             this.mapper = mapper;
             capitalRepo = new CapitalRepository(work.CreateRepository<Capital>());
             userRepo = work.CreateRepository<DappUser>();
-            utilityRepo = work.CreateRepository<Utility>();
         }
 
         public async Task<CapitalDataViewModel> CancelCapital(long id)
@@ -143,11 +141,6 @@ namespace DappAPI.Services.CapitalServices
             }
             List<CapitalDataViewModel> result = mapper.Map<List<Capital>, List<CapitalDataViewModel>>(capitals);
             return result;
-        }
-
-        public long GetTotalMoney()
-        {
-            return utilityRepo.FirstOrDefault(x => true).TotalMoney;
         }
 
         public async Task<CapitalDataViewModel> UpdateCapital(UpdateCapitalViewModel request)
