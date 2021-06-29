@@ -68,10 +68,10 @@ namespace DappAPI.Services.Account
                 Random random = new Random();
                 user.Nonce = random.Next(10000, 100000);
                 await work.SaveAsync();
-                UserRole admin = roleManager.Roles.FirstOrDefault(x => x.Name == "admin");
+                UserRole staff = roleManager.Roles.FirstOrDefault(x => x.Name == "staff");
                 userRoleRepo.Add(new IdentityUserRole<Guid>()
                 {
-                    RoleId = admin.Id,
+                    RoleId = staff.Id,
                     UserId = user.Id
                 });
                 await work.SaveAsync();

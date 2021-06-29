@@ -1,4 +1,5 @@
-﻿using DappAPI.Models;
+﻿using DappAPI.Extensions.Enums;
+using DappAPI.Models;
 using DappAPI.Services.Account;
 using DappAPI.Services.CapitalServices;
 using DappAPI.ViewModels;
@@ -21,7 +22,7 @@ namespace DappAPI.Services.Statistical
 
         public StatisticalViewModel GetStastical()
         {
-            List<CapitalDataViewModel> capitals = capitalService.GetAllCapitals();
+            List<CapitalDataViewModel> capitals = capitalService.GetAllCapitals().Where(x => x.Status == "Finished").ToList();
             List<UserDataViewModel> users = accountService.GetAllUsersInfo();
             StatisticalViewModel statistical = new StatisticalViewModel();
             statistical.TotalCapital = capitals.Sum(x => x.Value);
